@@ -1,10 +1,10 @@
 function(doc) {
-  if ('notebooks' in doc) {
+  if ('notebooks' in doc && 'type' in doc && doc.type !== 'Notebook') {
     for(var i = 0; i < doc.notebooks.length; i++) {
-      // emit the notebook for ?include_docs=true
-      emit(doc.notebooks[i], {_id: doc.notebooks[i]});
-      // emit the item
-      emit(doc.notebooks[i], 1);
+      emit([doc.notebooks[i], doc._id], 1);
+      emit([doc.notebooks[i], 'type', doc.type], 1);
     }
+  } else if ('type' in doc && doc.type == 'Notebook') {
+    emit([doc._id], 0);
   }
 }

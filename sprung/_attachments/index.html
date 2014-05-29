@@ -21,44 +21,28 @@
     springpad.com gave you.</p>
   </section>
 
-  <form id="import-form" class="ui form">
-    <div class="ui field">
-      <label>Choose your export.json</label>
-      <input id="export-file" type="file" />
+  <article class="ui three column grid">
+    <section class="column">
+      <div v-component="thing-notebook-list" class="ui fluid vertical menu">
+        <a class="item" v-on="click: current.notebook = id" v-class="active: current.notebook == id"
+          v-repeat="items.rows">
+          {{key}}
+        </a>
+      </div>
+    </section>
+    <section class="column">
+    <div v-component="thing-type-list" v-with="notebook: current.notebook" class="ui fluid vertical menu">
+      <a class="item" v-on="click: current.type = type" v-class="active: current.type == type" v-repeat="types">{{type}} <span class="ui label">{{count}}</span></a>
     </div>
-  </form>
-  <div id="results">
-    <ul v-if="rows">
-      <li v-repeat="rows"><a href="../../{{id}}" target="_blank">{{id}}</a></li>
-    </ul>
+    </section>
+    <section class="column">
+      <div v-component="thing-by-type" v-with="type: current.type" class="ui fluid vertical menu">
+        <div class="item" v-repeat="items.rows"><a href="../../{{id}}" target="_blank">{{doc.name}}</a></li>
+      </div>
+    </section>
   </div>
   <script src="vue.min.js"></script>
-  <script>
-  var results = {rows: []};
-  var inputElement = document.getElementById("export-file");
-  inputElement.addEventListener("change", handleFiles, false);
-  function handleFiles() {
-    var fileList = this.files;
-    var reader = new FileReader();
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', '../../_bulk_docs');
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onload = function() {
-      results.rows = JSON.parse(this.responseText);
-    }
-    reader.onload = function(e) {
-      var docs = JSON.parse(e.target.result);
-      for (var i = 0; i < docs.length; i++) {
-        docs[i]._id = docs[i].uuid;
-      }
-      xhr.send(JSON.stringify({docs: docs}));
-    };
-    reader.readAsBinaryString(fileList[0]);
-  }
-  var app = new Vue({
-    el: 'body',
-    data: results
-  });
+  <script src="app.js">
   </script>
 </body>
 </html>
