@@ -32,8 +32,8 @@ Vue.component('thing-type-list', {
   computed: {
     apiUrl: function() {
       if (this.notebook) {
-        return '_view/by_notebook?group=true&startkey=["' + this.notebook
-          + '","type"]&endkey=["' + this.notebook + '", "type", {}]';
+        return '_view/by_notebook?group_level=2&startkey=["' + this.notebook
+          + '"]&endkey=["' + this.notebook + '", {}]';
       } else {
         return '_view/by_type?group_level=1';
       }
@@ -53,10 +53,13 @@ Vue.component('thing-type-list', {
       xhr.onload = function () {
         self.items = JSON.parse(xhr.responseText);
         self.types = [];
-        if (self.items.rows[0].key[2]) {
+        if (self.notebook) {
           for (var i = 0; i < self.items.rows.length; i++) {
-            self.types.push({"type": self.items.rows[i].key[2],
-              "count": self.items.rows[i].value});
+            // if there are 2 keys, we have a type entry
+            if (self.items.rows[i].key.length === 2) {
+              self.types.push({"type": self.items.rows[i].key[1],
+                "count": self.items.rows[i].value});
+            }
           }
         } else {
           for (var i = 0; i < self.items.rows.length; i++) {
