@@ -24,6 +24,9 @@
   <article class="ui three column grid">
     <section class="column">
       <div v-component="thing-notebook-list" class="ui fluid vertical menu">
+        <a class="item" v-on="click: current.notebook = false" v-class="active: current.notebook == false">
+          All
+        </a>
         <a class="item" v-on="click: current.notebook = id" v-class="active: current.notebook == id"
           v-repeat="items.rows">
           {{key}}
