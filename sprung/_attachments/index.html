@@ -36,8 +36,8 @@
     </div>
     </section>
     <section class="column">
-      <div v-component="thing-by-type" v-with="type: current.type" class="ui fluid vertical menu">
-        <div class="item" v-repeat="items.rows"><a href="../../{{id}}" target="_blank">{{doc.name}}</a></li>
+      <div v-component="thing-list" v-with="notebook: current.notebook, type: current.type" class="ui fluid vertical menu">
+        <div class="item" v-repeat="items.rows"><a href="../../{{id}}" target="_blank">{{doc.name}}</a></div>
       </div>
     </section>
   </div>

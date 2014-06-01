@@ -73,12 +73,19 @@ Vue.component('thing-type-list', {
   },
 });
 
-Vue.component('thing-by-type', Fetchable.extend({
+Vue.component('thing-list', Fetchable.extend({
   data: {
+    notebook: false,
     type: 'Book'
   },
   computed: {
     apiUrl: function() {
+      if (this.notebook) {
+        return '_view/by_notebook?reduce=false'
+          + '&startkey=["' + this.notebook + '", "' + this.type + '"]'
+          + '&endkey=["' + this.notebook + '", "' + this.type + '", {}]'
+          + '&include_docs=true';
+      }
       return '_view/by_type?startkey=["' + this.type + '"]&endkey=["' +
         this.type + '",{}]&reduce=false&include_docs=true';
     }
