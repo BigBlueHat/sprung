@@ -34,9 +34,12 @@
       </div>
     </section>
     <section class="column">
-    <div v-component="thing-type-list" v-with="notebook: current.notebook" class="ui fluid vertical menu">
-      <a class="item" v-on="click: current.type = type" v-class="active: current.type == type" v-repeat="types">{{type}} <span class="ui label">{{count}}</span></a>
-    </div>
+      <div v-component="thing-type-list" v-with="notebook: current.notebook" class="ui fluid vertical menu">
+        <a class="item" v-on="click: current.type = false" v-class="active: current.type == false">
+          All
+        </a>
+        <a class="item" v-on="click: current.type = type" v-class="active: current.type == type" v-repeat="types">{{type}} <span class="ui label">{{count}}</span></a>
+      </div>
     </section>
     <section class="column">
       <div v-component="thing-list" v-with="notebook: current.notebook, type: current.type" class="ui fluid vertical menu">
