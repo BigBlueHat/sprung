@@ -23,11 +23,35 @@
 
   <article class="ui three column grid">
     <section class="column">
+      <div class="ui huge compact menu" v-component="thing-notebook-list">
+        <div class="ui inline dropdown item"
+          v-on="click: this.$el.firstElementChild.classList.toggle('visible')">
+          <strong v-if="!current.notebook" class="text">
+            All
+          </strong>
+          <strong v-if="current.notebook_name" class="text">
+            {{current.notebook_name}}
+          </strong>
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <div class="item" v-on="click: unsetCurrent"
+              v-class="active: unsetCurrent">
+              All
+            </div>
+            <div class="item" v-on="click: setCurrent(this)"
+              v-class="active: current.notebook == id"
+              v-repeat="items.rows">
+              {{key}}
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div v-component="thing-notebook-list" class="ui fluid vertical menu">
-        <a class="item" v-on="click: current.notebook = false" v-class="active: current.notebook == false">
+        <a class="item" v-on="click: unsetCurrent" v-class="active: current.notebook == false">
           All
         </a>
-        <a class="item" v-on="click: current.notebook = id" v-class="active: current.notebook == id"
+        <a class="item" v-on="click: setCurrent(this)" v-class="active: current.notebook == id"
           v-repeat="items.rows">
           {{key}}
         </a>
