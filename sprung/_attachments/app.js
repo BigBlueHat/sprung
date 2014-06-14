@@ -143,9 +143,17 @@ Vue.component('thing-list', Fetchable.extend({
 var app = new Vue({
   el: 'body',
   data: {
+    ui: {
+      sidebarIsOpen: false
+    },
     current: {
       notebook: false,
       type: false
+    }
+  },
+  methods: {
+    toggleSidebar: function() {
+      this.ui.sidebarIsOpen = !this.ui.sidebarIsOpen;
     }
   }
 });

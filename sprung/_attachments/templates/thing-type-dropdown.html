@@ -1,0 +1,23 @@
+<div class="ui huge compact menu" v-component="thing-type-list" v-with="notebook: current.notebook">
+  <div class="ui inline dropdown item"
+    v-on="click: this.$el.firstElementChild.classList.toggle('visible')">
+    <strong v-if="!current.type" class="text">
+      All
+    </strong>
+    <strong v-if="current.type" class="text">
+      {{current.type}}
+    </strong>
+    <i class="dropdown icon"></i>
+    <div class="menu">
+      <div class="item" v-on="click: current.type = false"
+        v-class="active: current.type == false">
+        All
+      </div>
+      <div class="item" v-on="click: current.type = type"
+        v-class="active: current.type == type"
+        v-repeat="types">
+        {{type}}
+      </div>
+    </div>
+  </div>
+</div>

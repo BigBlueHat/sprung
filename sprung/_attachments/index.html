@@ -2,18 +2,84 @@
 <html>
 <head>
   <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Sprung</title>
+
+  <link rel="stylesheet" type="text/css" href="semantic-site_files/css.css" />
   <link rel="stylesheet" type="text/css" href="semantic-ui/css/semantic.min.css" />
+  <link rel="stylesheet" type="text/css" href="app.css">
+
   <style type="text/css">
   .accordion .title.active{position:relative}
   .accordion .content{overflow:auto}
   </style>
 </head>
-<body>
+<body id="example" v-class="pushed: ui.sidebarIsOpen, left: ui.sidebarIsOpen">
+  <!-- collapsible sidebar -->
+  <div class="ui large vertical inverted labeled sidebar menu" id="menu"
+    v-class="active: ui.sidebarIsOpen"
+    v-component="thing-notebook-list">
+      <a class="item" v-on="click: unsetCurrent" v-class="active: current.notebook == false">
+        All
+      </a>
+      <a class="item" v-on="click: setCurrent(this), click: $root.toggleSidebar()" v-class="active: current.notebook == id"
+        v-repeat="items.rows">
+        {{key}}
+      </a>
+    </div>
+  </div>
 
-  <a href="https://github.com/bigbluehat/sprung">
-    <img style="position: absolute; z-index: 1; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/52760788cde945287fbb584134c4cbc2bc36f904/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png">
-  </a>
+  <!-- header menu -->
+  <div class="ui fixed transparent inverted main menu">
+    <div class="container">
+      <a class="launch item" v-on="click: toggleSidebar"><i class="icon list layout"></i> Notebooks</a>
+      <div class="title item">
+        <b>Types:</b>
+      </div>
+
+      <div class="section ui dropdown simple link item"
+        v-component="thing-type-list" v-with="notebook: current.notebook"
+        v-on="click: this.$el.firstElementChild.classList.toggle('visible')">
+        <strong v-if="!current.type" class="text">
+          All
+        </strong>
+        <strong v-if="current.type" class="text">
+          {{current.type}}
+        </strong>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          <div class="item" v-on="click: current.type = false"
+            v-class="active: current.type == false">
+            All
+          </div>
+          <div class="item" v-on="click: current.type = type"
+            v-class="active: current.type == type"
+            v-repeat="types">
+            {{type}}
+          </div>
+        </div>
+      </div>
+
+      <div class="right menu">
+        <a class="popup icon github item" data-content="View project on Github" href="https://github.com/bigbluehat/sprung">
+          <i class="icon github"></i>
+        </a>
+        <!--
+        <div class="ui simple dropdown item">
+          <i class="icon tint"></i> Theme
+          <div class="theme menu">
+            <div class="active item" data-theme="flat">Flat</div>
+            <div class="item" data-theme="shaded">Shaded</div>
+            <div class="item" data-theme="classic">Classic</div>
+          </div>
+        </div>
+        !-->
+      </div>
+    </div>
+  </div>
+
 
   <section>
     <h1 class="ui header">Sprung</h1>
@@ -21,82 +87,26 @@
     springpad.com gave you.</p>
   </section>
 
-  <article class="ui three column grid">
-    <section class="column">
-      <div class="ui huge compact menu" v-component="thing-notebook-list">
-        <div class="ui inline dropdown item"
-          v-on="click: this.$el.firstElementChild.classList.toggle('visible')">
-          <strong v-if="!current.notebook" class="text">
-            All
-          </strong>
-          <strong v-if="current.notebook_name" class="text">
-            {{current.notebook_name}}
-          </strong>
-          <i class="dropdown icon"></i>
-          <div class="menu">
-            <div class="item" v-on="click: unsetCurrent"
-              v-class="active: unsetCurrent">
-              All
-            </div>
-            <div class="item" v-on="click: setCurrent(this)"
-              v-class="active: current.notebook == id"
-              v-repeat="items.rows">
-              {{key}}
-            </div>
+  <section v-component="thing-list" v-with="notebook: current.notebook, type: current.type">
+    <div class="ui stackable items">
+      <div class="item" v-repeat="items.rows">
+        <div class="image">
+          <img src="{{doc.image}}" />
+          <a class="like ui corner label">
+            <i class="like icon" v-class="active: doc.liked"></i>
+          </a>
+        </div>
+        <div class="content">
+          <div class="name">{{doc.name}}</div>
+          <p class="description">{{doc.description}}</p>
+          <div class="extra">
+              199 votes
           </div>
         </div>
       </div>
-
-      <div v-component="thing-notebook-list" class="ui fluid vertical menu">
-        <a class="item" v-on="click: unsetCurrent" v-class="active: current.notebook == false">
-          All
-        </a>
-        <a class="item" v-on="click: setCurrent(this)" v-class="active: current.notebook == id"
-          v-repeat="items.rows">
-          {{key}}
-        </a>
-      </div>
-    </section>
-    <section class="column">
-      <div class="ui huge compact menu" v-component="thing-type-list" v-with="notebook: current.notebook">
-        <div class="ui inline dropdown item"
-          v-on="click: this.$el.firstElementChild.classList.toggle('visible')">
-          <strong v-if="!current.type" class="text">
-            All
-          </strong>
-          <strong v-if="current.type" class="text">
-            {{current.type}}
-          </strong>
-          <i class="dropdown icon"></i>
-          <div class="menu">
-            <div class="item" v-on="click: current.type = false"
-              v-class="active: current.type == false">
-              All
-            </div>
-            <div class="item" v-on="click: current.type = type"
-              v-class="active: current.type == type"
-              v-repeat="types">
-              {{type}}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div v-component="thing-type-list" v-with="notebook: current.notebook" class="ui fluid vertical menu">
-        <a class="item" v-on="click: current.type = false" v-class="active: current.type == false">
-          All
-        </a>
-        <a class="item" v-on="click: current.type = type" v-class="active: current.type == type" v-repeat="types">{{type}} <span class="ui label">{{count}}</span></a>
-      </div>
-    </section>
-    <section class="column">
-      <div v-component="thing-list" v-with="notebook: current.notebook, type: current.type" class="ui fluid vertical menu">
-        <div class="item" v-repeat="items.rows"><a href="../../{{id}}" target="_blank">{{doc.name}}</a></div>
-      </div>
-    </section>
-  </div>
+    </div>
+  </section>
   <script src="vue.min.js"></script>
-  <script src="app.js">
-  </script>
+  <script src="app.js"></script>
 </body>
 </html>
