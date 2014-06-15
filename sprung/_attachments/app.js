@@ -113,6 +113,9 @@ Vue.component('thing-list', Fetchable.extend({
     }
   },
   created: function() {
+    this.$watch('notebook', function() {
+      this.fetchData();
+    });
     this.$watch('type', function() {
       this.fetchData();
     });
