@@ -34,16 +34,17 @@
   <!-- header menu -->
   <div class="ui fixed transparent inverted main menu">
     <div class="container">
-      <a class="launch item" v-on="click: toggleSidebar"><i class="icon list layout"></i> Notebooks</a>
-      <div class="title item">
-        <b>Types:</b>
-      </div>
+      <a class="launch item" v-on="click: toggleSidebar">
+        <i class="icon list layout"></i>
+        <span v-if="current.notebook_name">{{current.notebook_name}}</span>
+        <span v-if="!current.notebook_name">Notebooks</span>
+      </a>
 
       <div class="section ui dropdown simple link item"
         v-component="thing-type-list" v-with="notebook: current.notebook"
         v-on="click: this.$el.firstElementChild.classList.toggle('visible')">
         <strong v-if="!current.type" class="text">
-          All
+          All Types
         </strong>
         <strong v-if="current.type" class="text">
           {{current.type}}
@@ -88,7 +89,7 @@
   </section>
 
   <section v-component="thing-list" v-with="notebook: current.notebook, type: current.type">
-    <div class="ui stackable items">
+    <div class="ui six stackable items">
       <div class="item" v-repeat="items.rows">
         <div class="image">
           <img src="{{doc.image}}" />
@@ -98,7 +99,7 @@
         </div>
         <div class="content">
           <div class="name">{{doc.name}}</div>
-          <p class="description">{{doc.description}}</p>
+          <p class="description" v-html="doc.description"></p>
           <div class="extra">
               199 votes
           </div>
