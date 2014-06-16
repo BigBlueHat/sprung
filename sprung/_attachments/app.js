@@ -129,20 +129,38 @@ Vue.component('thing-list', Fetchable.extend({
       xhr.open('GET', self.apiUrl);
       xhr.onload = function () {
         self.items = JSON.parse(xhr.responseText);
-        if (self.notebook === false && self.type === false) {
-          // we've got a non-include_docs thing, so let's spoof `name`
-          for (var i = 0; i < self.items.rows.length; i++) {
-            if (self.items.rows[i].key.length === 2) {
-              self.items.rows[i].doc = {};
-              self.items.rows[i].doc.name = self.items.rows[i].key[1];
-            }
-          }
-        }
       };
       xhr.send();
     }
   }
 }));
+
+Vue.component('import-form', {
+  data: {
+    results: []
+  },
+  methods: {
+    processImport: function() {
+      var export_file = document.getElementById('export-file').files[0];
+      var reader = new FileReader();
+      var xhr = new XMLHttpRequest();
+      var self = this;
+      xhr.open('POST', '../../_bulk_docs');
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.onload = function() {
+        self.results = JSON.parse(this.responseText);
+      }
+      reader.onload = function(e) {
+        var docs = JSON.parse(e.target.result);
+        for (var i = 0; i < docs.length; i++) {
+          docs[i]._id = docs[i].uuid;
+        }
+        xhr.send(JSON.stringify({docs: docs}));
+      };
+      reader.readAsBinaryString(export_file);
+    }
+  }
+});
 
 var app = new Vue({
   el: 'body',
@@ -158,6 +176,9 @@ var app = new Vue({
   methods: {
     toggleSidebar: function() {
       this.ui.sidebarIsOpen = !this.ui.sidebarIsOpen;
+    },
+    importFile: function() {
+      document.getElementById('export-file').click()
     }
   }
 });

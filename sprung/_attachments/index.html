@@ -64,7 +64,17 @@
       </div>
 
       <div class="right menu">
-        <a class="popup icon github item" data-content="View project on Github" href="https://github.com/bigbluehat/sprung">
+        <a class="icon upload item"
+          v-on="click: importFile">
+          <i class="icon upload"></i>
+          Import
+        </a>
+              <form class="ui form" style="display:none"
+                v-component="import-form">
+                <input id="export-file" v-on="change: processImport" type="file" />
+              </form>
+
+        <a class="icon github item" href="https://github.com/bigbluehat/sprung">
           <i class="icon github"></i>
         </a>
         <!--
