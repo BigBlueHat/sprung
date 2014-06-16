@@ -80,33 +80,24 @@
       </div>
     </div>
   </div>
-
-
-  <section>
-    <h1 class="ui header">Sprung</h1>
-    <p>Use the form below to upload your <code>export.json</code> from the export <code>.zip</code> file
-    springpad.com gave you.</p>
-  </section>
-
-  <section v-component="thing-list" v-with="notebook: current.notebook, type: current.type">
+  <article class="content"
+    v-component="thing-list"
+    v-with="notebook: current.notebook, type: current.type">
     <div class="ui six stackable items">
       <div class="item" v-repeat="items.rows">
         <div class="image">
-          <img src="{{doc.image}}" />
+          <img v-attr="src: doc.image" />
           <a class="like ui corner label">
             <i class="like icon" v-class="active: doc.liked"></i>
           </a>
         </div>
         <div class="content">
           <div class="name">{{doc.name}}</div>
-          <p class="description" v-html="doc.description"></p>
-          <div class="extra">
-              199 votes
-          </div>
+          <p class="description">{{{doc.description}}}</p>
         </div>
       </div>
     </div>
-  </section>
+  </article>
   <script src="vue.min.js"></script>
   <script src="app.js"></script>
 </body>

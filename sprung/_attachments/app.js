@@ -108,7 +108,8 @@ Vue.component('thing-list', Fetchable.extend({
           this.type + '",{}]&reduce=false&include_docs=true';
       } else {
         // all the things from all the places
-        return '_view/by_type?reduce=false';
+        // TODO: paginate this thing
+        return '_view/by_type?reduce=false&include_docs=true';
       }
     }
   },

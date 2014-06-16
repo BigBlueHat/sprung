@@ -53,6 +53,16 @@ body#example {
 }
 body > .content  {
   background: #FCFCFC url(../images/bg.jpg) repeat;
+  padding:3.5em 1em;
+}
+body > .content > .items .name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+body > .content > .items .description {
+  height: 5em;
+  overflow: hidden;
 }
 
 h1,
