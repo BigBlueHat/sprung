@@ -131,9 +131,19 @@ Vue.component('thing-list', Fetchable.extend({
         self.items = JSON.parse(xhr.responseText);
       };
       xhr.send();
+    },
+    modalMe: function(ev) {
+      var modal = new ThingModal({
+        data: ev.targetVM.doc
+      });
+      modal.$appendTo('body');
     }
   }
 }));
+
+var ThingModal = Vue.extend({
+  template: '#thing-modal'
+});
 
 Vue.component('import-form', {
   data: {

@@ -94,7 +94,9 @@
     v-component="thing-list"
     v-with="notebook: current.notebook, type: current.type">
     <div class="ui six stackable items">
-      <div class="item" v-repeat="items.rows">
+      <div class="item" v-repeat="items.rows"
+        data-thing-id="{{doc._id}}"
+        v-on="click: modalMe">
         <div class="image">
           <img v-attr="src: doc.image" />
           <a class="like ui corner label">
@@ -108,6 +110,33 @@
       </div>
     </div>
   </article>
+
+  <script id="thing-modal" type="text/vuejs+html">
+    <div class="ui dimmer page visible active">
+      <div style="margin-top: -243.5px;" class="ui test modal transition visible active">
+        <i class="close icon"
+          v-on="click: this.$destroy()"></i>
+        <div class="header">
+          {{name}}
+        </div>
+        <div class="content">
+          <div class="left">
+            <img class="ui medium image"
+              v-attr="src: image" />
+          </div>
+          <div class="right">
+            {{{description}}}
+          </div>
+        </div>
+        <div class="actions">
+          <div class="ui black button"
+            v-on="click: this.$destroy()">
+            Close
+          </div>
+        </div>
+      </div>
+    </div>
+  </script>
   <script src="vue.min.js"></script>
   <script src="app.js"></script>
 </body>
