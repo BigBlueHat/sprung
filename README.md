@@ -17,25 +17,46 @@ Web" and is therefore quite concious of such needs.
 **Note:** I fully intend to make this all much easier. "Geeks" only atm.
 Sorry. :frown:
 
-Install [couchapp.py](http://github.com/couchapp/couchapp)
-(or other `couchapp.py` compatible thing).
-
+1. Create a `.couchapprc` JSON doc in the `sprung` folder, something like this:
 ```
-$ couchapp push . http://USER:PASS@localhost:5984/sprung/
+{
+  "env": {
+    "default": {
+      "db": "http://USER:PASSWORD@localhost:5984/sprung"
+    }
+  }
+}
+```
+(obviously replace `USER` and `PASSWORD` with something useful...)
+2. Install [couchapp.py](http://github.com/couchapp/couchapp)
+(or other `couchapp.py` compatible thing).
+3. Next install the necessary dev tools and dependencies via:
+```
+npm install
+```
+4. Build the `app.js` file:
+```
+npm run dev
+```
+5. Deploy the CouchApp:
+```
+cd sprung
+couchapp push . default
 ```
 
 Change the URL above to the be the URL of the CouchDB or
 [Cloudant](http://cloudant.com/) database you'd like to keep your Springpad
 data in.
 
-Once that's done, visit the URL `couchapp` gives you. Which will be
+Once that's done, visit the URL `couchapp.py` gives you. Which will be
 something like: `http://localhost:5984/sprung/_design/sprung/index.html`
 
 ## Future
 
-The viewer code kindly provided by Springpad sadly lacks license information,
-so it looks like I'll be rebuilding it with [Vue.js](http://vuejs.com/) as
-part of this project.
+Springpad.com (may it rest in peace) was very close to a
+note-taking-app-supreme idea that I've had for some time.
+
+It's demise finally tipped the scales in favor of action. :smiley_cat:
 
 ## License
 
