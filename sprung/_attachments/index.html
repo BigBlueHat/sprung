@@ -14,6 +14,13 @@
   <style type="text/css">
   .accordion .title.active{position:relative}
   .accordion .content{overflow:auto}
+  .ui.active.modal {
+    top: 0;
+    bottom: 0;
+    margin-top: 0 !important;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
   </style>
 </head>
 <body id="example" v-class="pushed: ui.sidebarIsOpen, left: ui.sidebarIsOpen">
@@ -61,6 +68,10 @@
             {{type}}
           </div>
         </div>
+      </div>
+      <div class="item">
+        <a class="ui green icon button"
+          v-on="click: openMakeModal"><i class="plus icon"></i></a>
       </div>
 
       <div class="right menu">

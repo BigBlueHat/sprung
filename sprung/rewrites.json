@@ -1,0 +1,9 @@
+[
+  {
+    "from": "schemas/:schema",
+    "to": "../schemas/_list/compile/schemas",
+    "query": {
+      "include_docs": "true"
+    }
+  }
+]
