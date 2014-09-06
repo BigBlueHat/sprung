@@ -111,32 +111,6 @@
     </div>
   </article>
 
-  <script id="thing-modal" type="text/vuejs+html">
-    <div class="ui dimmer page visible active">
-      <div style="margin-top: -243.5px;" class="ui test modal transition visible active">
-        <i class="close icon"
-          v-on="click: this.$destroy()"></i>
-        <div class="header">
-          {{name}}
-        </div>
-        <div class="content">
-          <div class="left">
-            <img class="ui medium image"
-              v-attr="src: image" />
-          </div>
-          <div class="right">
-            {{{description}}}
-          </div>
-        </div>
-        <div class="actions">
-          <div class="ui black button"
-            v-on="click: this.$destroy()">
-            Close
-          </div>
-        </div>
-      </div>
-    </div>
-  </script>
   <script src="app.js"></script>
 </body>
 </html>

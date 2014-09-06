@@ -1,0 +1,38 @@
+<div class="ui dimmer page visible active">
+  <div style="margin-top: -243.5px;" class="ui test modal transition visible active">
+    <i class="close icon"
+      v-on="click: this.$destroy()"></i>
+    <div class="header">
+      <div class="ui left floated header">
+        {{name}}
+      </div>
+      <div class="ui right floated tiny header">
+        {{type}}
+      </div>
+    </div>
+    <div class="content">
+      <div class="left">
+        <img class="ui medium image"
+          v-attr="src: image" />
+      </div>
+      <div class="right">
+        <div>{{{description}}}</div>
+        <ul v-if="type == 'Book'">
+          <li v-if="author">author: {{author}}</li>
+          <li v-if="price">price: {{price}}</li>
+          <li>publication date: {{$data}}</li>
+          <li>cover: {{cover}}</li>
+          <li>genres: {{genres}}</li>
+          <li>level: {{level}}</li>
+          <li>isbn: {{isbn}}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="actions">
+      <div class="ui black button"
+        v-on="click: this.$destroy()">
+        Close
+      </div>
+    </div>
+  </div>
+</div>

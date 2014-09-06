@@ -1,9 +1,5 @@
-var Vue = require('vue');
+var ThingModal = require('../thing-modal');
 var Fetchable = require('../fetchable');
-
-var ThingModal = Vue.extend({
-  template: '#thing-modal'
-});
 
 module.exports = Fetchable.extend({
   data: {
