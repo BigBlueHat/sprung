@@ -5,7 +5,8 @@ window.Sprung = new Vue({
   el: 'body',
   data: {
     ui: {
-      sidebarIsOpen: false
+      sidebarIsOpen: false,
+      modalIsOpen: false
     },
     current: {
       notebook: false,
@@ -21,11 +22,16 @@ window.Sprung = new Vue({
     },
     openMakeModal: function() {
       // with no thing ID provided, open a blank editing form
+      var app = this;
       var modal = new MakeModal({
         data: {
           schema_name: 'springpad-note'
+        },
+        afterDestroy: function() {
+          app.ui.modalIsOpen = false
         }
       });
+      app.ui.modalIsOpen = true;
       modal.$appendTo('body');
     }
   },

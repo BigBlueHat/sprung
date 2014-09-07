@@ -51,9 +51,14 @@ module.exports = Fetchable.extend({
       xhr.send();
     },
     modalMe: function(ev) {
+      var app = this.$root;
       var modal = new ThingModal({
-        data: ev.targetVM.doc
+        data: ev.targetVM.doc,
+        afterDestroy: function() {
+          app.ui.modalIsOpen = false
+        }
       });
+      app.ui.modalIsOpen = true;
       modal.$appendTo('body');
     }
   }

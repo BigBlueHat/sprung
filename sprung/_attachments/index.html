@@ -12,6 +12,9 @@
   <link rel="stylesheet" type="text/css" href="app.css">
 
   <style type="text/css">
+  body.modaled{
+    overflow:hidden;
+  }
   .accordion .title.active{position:relative}
   .accordion .content{overflow:auto}
   .ui.active.modal {
@@ -23,7 +26,10 @@
   }
   </style>
 </head>
-<body id="example" v-class="pushed: ui.sidebarIsOpen, left: ui.sidebarIsOpen">
+<body id="example"
+  v-class="pushed: ui.sidebarIsOpen,
+    left: ui.sidebarIsOpen,
+    modaled: ui.modalIsOpen">
   <!-- collapsible sidebar -->
   <div class="ui large vertical inverted labeled sidebar menu" id="menu"
     v-class="active: ui.sidebarIsOpen"
