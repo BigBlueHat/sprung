@@ -41,5 +41,8 @@ window.Sprung = new Vue({
     'thing-type-list': require('./thing-type-list'),
     'thing-notebook-list': require('./thing-notebook-list'),
     'vue-schema': require('./vue-schema')
+  },
+  filters: {
+    iconize: require('./filters/iconize')
   }
 });

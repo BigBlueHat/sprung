@@ -18,8 +18,8 @@
   .accordion .title.active{position:relative}
   .accordion .content{overflow:auto}
   .ui.active.modal {
-    top: 0;
-    bottom: 0;
+    top: 2em;
+    bottom: 2em;
     margin-top: 0 !important;
     overflow-y: auto;
     overflow-x: hidden;
@@ -60,6 +60,7 @@
           All Types
         </strong>
         <strong v-if="current.type" class="text">
+          <i class="{{current.type | iconize}} icon"></i>
           {{current.type}}
         </strong>
         <i class="dropdown icon"></i>
@@ -71,6 +72,7 @@
           <div class="item" v-on="click: current.type = type"
             v-class="active: current.type == type"
             v-repeat="types">
+            <i class="{{type | iconize}} icon"></i>
             {{type}}
           </div>
         </div>

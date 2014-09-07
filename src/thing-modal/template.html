@@ -1,13 +1,15 @@
 <div class="ui dimmer page visible active">
   <div class="ui test modal transition visible active">
-    <i class="close icon"
-      v-on="click: this.$destroy()"></i>
     <div class="header">
       <div class="ui left floated header">
+        <i class="{{type | iconize}} icon"></i>
         {{name}}
       </div>
       <div class="ui right floated tiny header">
-        {{type}}
+        <div class="ui black button"
+          v-on="click: this.$destroy()">
+          Close
+        </div>
       </div>
     </div>
     <div class="content">
