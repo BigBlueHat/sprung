@@ -1,10 +1,14 @@
 var ThingModal = require('../thing-modal');
-var Fetchable = require('../fetchable');
 
-module.exports = Fetchable.extend({
-  data: {
-    notebook: false,
-    type: false
+module.exports = {
+  data: function() {
+    return {
+      notebook: false,
+      type: false,
+      items: {
+        rows: []
+      }
+    };
   },
   computed: {
     apiUrl: function() {
@@ -32,6 +36,7 @@ module.exports = Fetchable.extend({
     }
   },
   created: function() {
+    this.fetchData();
     this.$watch('notebook', function() {
       this.fetchData();
     });
@@ -54,12 +59,13 @@ module.exports = Fetchable.extend({
       var app = this.$root;
       var modal = new ThingModal({
         data: ev.targetVM.doc,
-        afterDestroy: function() {
+        destroyed: function() {
           app.ui.modalIsOpen = false
         }
       });
       app.ui.modalIsOpen = true;
+      modal.$mount();
       modal.$appendTo('body');
     }
   }
-});
+};

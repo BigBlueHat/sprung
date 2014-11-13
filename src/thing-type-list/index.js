@@ -1,7 +1,9 @@
 module.exports = {
-  data: {
-    notebook: false,
-    types: []
+  data: function() {
+    return {
+      notebook: false,
+      types: []
+    };
   },
   computed: {
     apiUrl: function() {
@@ -14,6 +16,7 @@ module.exports = {
     }
   },
   created: function() {
+    this.fetchData();
     this.$watch('notebook', function() {
       this.fetchData();
     });

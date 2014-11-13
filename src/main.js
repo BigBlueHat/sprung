@@ -27,11 +27,12 @@ window.Sprung = new Vue({
         data: {
           schema_name: 'springpad-note'
         },
-        afterDestroy: function() {
+        destroyed: function() {
           app.ui.modalIsOpen = false
         }
       });
       app.ui.modalIsOpen = true;
+      modal.$mount();
       modal.$appendTo('body');
     }
   },

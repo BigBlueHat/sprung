@@ -1,8 +1,10 @@
 var Fetchable = require('../fetchable');
 
 module.exports = Fetchable.extend({
-  data: {
-    schema_name: ''
+  data: function() {
+    return {
+      schema_name: ''
+    };
   },
   computed: {
     apiUrl: function() {
@@ -13,6 +15,11 @@ module.exports = Fetchable.extend({
   created: function() {
     if (this.schema_name !== '') {
       this.fetchData();
+    }
+  },
+  methods: {
+    destroy: function() {
+      this.$destroy(true);
     }
   }
 });

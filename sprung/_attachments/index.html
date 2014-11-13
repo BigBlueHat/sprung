@@ -54,7 +54,7 @@
       </a>
 
       <div class="section ui dropdown simple link item"
-        v-component="thing-type-list" v-with="notebook: current.notebook"
+        v-component="thing-type-list" v-with="current: current, notebook: current.notebook"
         v-on="click: this.$el.firstElementChild.classList.toggle('visible')">
         <strong v-if="!current.type" class="text">
           All Types

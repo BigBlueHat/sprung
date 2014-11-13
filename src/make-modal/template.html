@@ -1,7 +1,7 @@
 <div class="ui dimmer page visible active">
   <div style="margin-top: -243.5px;" class="ui test modal transition visible active">
     <i class="close icon"
-      v-on="click: this.$destroy()"></i>
+      v-on="click: destroy()"></i>
     <div class="header">
       <div class="ui left floated header">
         {{name}}
@@ -16,7 +16,7 @@
     </div>
     <div class="actions">
       <div class="ui black button"
-        v-on="click: this.$destroy()">
+        v-on="click: destroy()">
         Close
       </div>
     </div>

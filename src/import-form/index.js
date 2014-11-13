@@ -1,6 +1,8 @@
 module.exports = {
-  data: {
-    results: []
+  data: function() {
+    return {
+      results: []
+    };
   },
   methods: {
     processImport: function() {

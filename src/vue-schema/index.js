@@ -1,8 +1,10 @@
 var Vue = require('vue');
 
 Vue.component('vue-schema', {
-  data: {
-    schema: {}
+  data: function() {
+    return {
+      schema: {}
+    };
   },
   template: require('./template.html'),
   components: {

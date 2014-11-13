@@ -1,8 +1,11 @@
 var Fetchable = require('../fetchable');
 
 module.exports = Fetchable.extend({
-  data: {
-    apiUrl: '_view/notebooks?reduce=false'
+  data: function() {
+    return {
+      apiUrl: '_view/notebooks?reduce=false',
+      items: []
+    };
   },
   methods: {
     setCurrent: function(notebook) {
@@ -13,5 +16,8 @@ module.exports = Fetchable.extend({
       this.$parent.current.notebook = false;
       this.$parent.current.notebook_name = false;
     }
+  },
+  created: function() {
+    this.fetchData();
   }
 });

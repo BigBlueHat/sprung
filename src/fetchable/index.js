@@ -1,8 +1,10 @@
 var Vue = require('vue');
 
 module.exports = Vue.extend({
-  data: {
-    items: []
+  data: function() {
+    return {
+      items: []
+    };
   },
   methods: {
     fetchData: function () {
