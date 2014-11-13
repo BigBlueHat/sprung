@@ -19,6 +19,10 @@
       <div class="left">
         <img class="ui medium image"
           v-attr="src: image" />
+        <div class="ui simple ignored divider"></div>
+        <div class="ui labels" v-if="tags">
+          <div class="ui label" v-repeat="tags">{{$value}}</div>
+        </div>
       </div>
       <div class="right">
         <div>{{{description}}}</div>
