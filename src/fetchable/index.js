@@ -18,9 +18,7 @@ module.exports = Vue.extend({
       xhr.send();
     }
   },
-  created: function() {
-    this.$watch('apiUrl', function() {
-      this.fetchData();
-    });
+  watch: {
+    apiUrl: 'fetchData'
   }
 });

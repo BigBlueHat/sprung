@@ -37,12 +37,10 @@ module.exports = {
   },
   created: function() {
     this.fetchData();
-    this.$watch('notebook', function() {
-      this.fetchData();
-    });
-    this.$watch('type', function() {
-      this.fetchData();
-    });
+  },
+  watch: {
+    notebook: 'fetchData',
+    type: 'fetchData'
   },
   methods: {
     fetchData: function () {

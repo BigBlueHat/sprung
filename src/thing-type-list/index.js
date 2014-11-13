@@ -17,9 +17,9 @@ module.exports = {
   },
   created: function() {
     this.fetchData();
-    this.$watch('notebook', function() {
-      this.fetchData();
-    });
+  },
+  watch: {
+    notebook: 'fetchData'
   },
   methods: {
     fetchData: function () {
