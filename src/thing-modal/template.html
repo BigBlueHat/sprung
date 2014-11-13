@@ -3,7 +3,10 @@
     <div class="header">
       <div class="ui left floated header">
         <i class="{{type | iconize}} icon"></i>
-        {{name}}
+        <div class="content">
+          {{name}}
+          <span class="sub header" v-if="author || artist">by {{author}}{{artist}}</span>
+        </div>
       </div>
       <div class="ui right floated tiny header">
         <div class="ui black button"
