@@ -1,4 +1,5 @@
 {
+  "_id": "schema|springpad-object",
   "title": "Springpad Object",
   "type": "object",
   "properties": {
