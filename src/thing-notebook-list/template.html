@@ -1,0 +1,11 @@
+<div class="ui large vertical inverted labeled sidebar menu" id="menu"
+  v-class="active: $root.ui.sidebarIsOpen">
+    <a class="item" v-on="click: unsetCurrent()" v-class="active: current.notebook == false">
+      All
+    </a>
+    <a class="item" v-on="click: setCurrent(this), click: $root.toggleSidebar()" v-class="active: current.notebook == id"
+      v-repeat="items.rows">
+      {{key}}
+    </a>
+  </div>
+</div>

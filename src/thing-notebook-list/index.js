@@ -1,6 +1,8 @@
 var Fetchable = require('../fetchable');
 
 module.exports = Fetchable.extend({
+  replace: true,
+  template: require('./template.html'),
   data: function() {
     return {
       apiUrl: '_view/notebooks?reduce=false',
