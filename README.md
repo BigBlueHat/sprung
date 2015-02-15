@@ -12,6 +12,10 @@ less in the way of curation, aggregation, annotation, and organization.
 However! [Apache CouchDB](http://couchdb.apache.org/) is "built of the
 Web" and is therefore quite concious of such needs.
 
+## Meet Sprung!
+
+![Screenshot of Sprung](./screenshot.png)
+
 ## Installation
 
 **Note:** I fully intend to make this all much easier. "Geeks" only atm.
