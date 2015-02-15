@@ -1,7 +1,10 @@
-module.exports = {
+var Vue = require('vue');
+
+module.exports = Vue.extend({
   data: function() {
     return {
-      schema_name: ''
+      schema_name: '',
+      items: {}
     };
   },
   computed: {
@@ -30,4 +33,4 @@ module.exports = {
       this.$destroy(true);
     }
   }
-}
+});
