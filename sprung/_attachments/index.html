@@ -42,30 +42,8 @@
         <span v-if="!current.notebook_name">Notebooks</span>
       </a>
 
-      <div class="section ui dropdown simple link item"
-        v-component="thing-type-list" v-with="current: current, notebook: current.notebook"
-        v-on="click: this.$el.firstElementChild.classList.toggle('visible')">
-        <strong v-if="!current.type" class="text">
-          All Types
-        </strong>
-        <strong v-if="current.type" class="text">
-          <i class="{{current.type | iconize}} icon"></i>
-          {{current.type}}
-        </strong>
-        <i class="dropdown icon"></i>
-        <div class="menu">
-          <div class="item" v-on="click: current.type = false"
-            v-class="active: current.type == false">
-            All
-          </div>
-          <div class="item" v-on="click: current.type = type"
-            v-class="active: current.type == type"
-            v-repeat="types">
-            <i class="{{type | iconize}} icon"></i>
-            {{type}}
-          </div>
-        </div>
-      </div>
+      <thing-type-list v-with="current: current"></thing-type-list>
+
       <div class="item">
         <a class="ui green icon button"
           v-on="click: openMakeModal"><i class="plus icon"></i></a>
