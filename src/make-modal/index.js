@@ -1,6 +1,4 @@
-var Fetchable = require('../fetchable');
-
-module.exports = Fetchable.extend({
+module.exports = {
   data: function() {
     return {
       schema_name: ''
@@ -18,8 +16,18 @@ module.exports = Fetchable.extend({
     }
   },
   methods: {
+    fetchData: function () {
+      if (!this.apiUrl) return false;
+      var xhr = new XMLHttpRequest(),
+          self = this;
+      xhr.open('GET', self.apiUrl);
+      xhr.onload = function () {
+        self.items = JSON.parse(xhr.responseText);
+      };
+      xhr.send();
+    },
     destroy: function() {
       this.$destroy(true);
     }
   }
-});
+}

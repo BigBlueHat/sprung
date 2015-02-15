@@ -1,6 +1,4 @@
-var Fetchable = require('../fetchable');
-
-module.exports = Fetchable.extend({
+module.exports = {
   replace: true,
   template: require('./template.html'),
   data: function() {
@@ -10,6 +8,16 @@ module.exports = Fetchable.extend({
     };
   },
   methods: {
+    fetchData: function () {
+      if (!this.apiUrl) return false;
+      var xhr = new XMLHttpRequest(),
+          self = this;
+      xhr.open('GET', self.apiUrl);
+      xhr.onload = function () {
+        self.items = JSON.parse(xhr.responseText);
+      };
+      xhr.send();
+    },
     setCurrent: function(notebook) {
       this.$parent.current.notebook = notebook.id;
       this.$parent.current.notebook_name = notebook.key;
@@ -22,4 +30,4 @@ module.exports = Fetchable.extend({
   created: function() {
     this.fetchData();
   }
-});
+}
