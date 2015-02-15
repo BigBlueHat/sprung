@@ -44,9 +44,16 @@
 
       <thing-type-list v-with="current: current"></thing-type-list>
 
-      <div class="item">
-        <a class="ui green icon button"
-          v-on="click: openMakeModal"><i class="plus icon"></i></a>
+      <div class="ui simple compact dropdown item">
+        <div class="ui green button"
+          v-on="click: openMakeModal('springpad-note')"><i class="plus icon"></i></div>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          <a class="item"
+            v-on="click: openMakeModal('springpad-note')"><strong>Note</strong></a>
+          <a class="item"
+            v-on="click: openMakeModal('springpad-object')">Object</a>
+        </div>
       </div>
 
       <div class="right menu">

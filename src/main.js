@@ -20,12 +20,12 @@ window.Sprung = new Vue({
     importFile: function() {
       document.getElementById('export-file').click()
     },
-    openMakeModal: function() {
+    openMakeModal: function(schema_name) {
       // with no thing ID provided, open a blank editing form
       var app = this;
       var modal = new MakeModal({
         data: {
-          schema_name: 'springpad-note'
+          schema_name: schema_name
         },
         destroyed: function() {
           app.ui.modalIsOpen = false
