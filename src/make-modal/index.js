@@ -3,8 +3,9 @@ var Vue = require('vue');
 module.exports = Vue.extend({
   data: function() {
     return {
+      name: '',
       schema_name: '',
-      items: {}
+      schema: {}
     };
   },
   computed: {
@@ -25,7 +26,13 @@ module.exports = Vue.extend({
           self = this;
       xhr.open('GET', self.apiUrl);
       xhr.onload = function () {
-        self.items = JSON.parse(xhr.responseText);
+        self.schema = JSON.parse(xhr.responseText);
+        if (self.schema.title) {
+          self.name = self.schema.title;
+          delete self.schema.title;
+        } else {
+          self.name = self.schema_name;
+        }
       };
       xhr.send();
     },

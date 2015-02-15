@@ -1,18 +1,18 @@
 <div class="ui dimmer page visible active">
-  <div style="margin-top: -243.5px;" class="ui test modal transition visible active">
-    <i class="close icon"
-      v-on="click: destroy()"></i>
+  <div class="ui test modal transition visible active">
     <div class="header">
       <div class="ui left floated header">
         {{name}}
       </div>
       <div class="ui right floated tiny header">
-        <!-- TODO: make this a drop-down of available schemas -->
-        {{type}}
+        <div class="ui black button"
+          v-on="click: destroy()">
+          Close
+        </div>
       </div>
     </div>
     <div class="content">
-      <vue-schema v-with="schema: items"></vue-schema>
+      <vue-schema v-with="schema: schema"></vue-schema>
     </div>
     <div class="actions">
       <div class="ui black button"
