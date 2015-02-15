@@ -7,7 +7,7 @@
   "repository": "https://github.com/BigBlueHat/sprung.git",
   "main": "src/main.js",
   "dependencies": {
-    "vue": "~0.11.0"
+    "vue": "0.11.0"
   },
   "devDependencies": {
     "watchify": "~0.6.1",
