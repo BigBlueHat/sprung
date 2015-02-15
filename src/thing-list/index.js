@@ -1,6 +1,8 @@
 var ThingModal = require('../thing-modal');
 
 module.exports = {
+  replace: true,
+  template: require('./template.html'),
   data: function() {
     return {
       notebook: false,
