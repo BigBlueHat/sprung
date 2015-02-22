@@ -1,6 +1,4 @@
-var Vue = require('vue');
-
-Vue.component('vue-schema', {
+module.exports = {
   data: function() {
     return {
       schema: {}
@@ -41,4 +39,4 @@ Vue.component('vue-schema', {
       return JSON.stringify(accumulate(json, jsonDOM), null, "\t");
     }
   }
-});
+};

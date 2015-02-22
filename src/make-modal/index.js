@@ -13,6 +13,9 @@ module.exports = Vue.extend({
       return '_rewrite/schemas/' + this.schema_name;
     }
   },
+  components: {
+    'vue-schema': require('../vue-schema')
+  },
   template: require('./template.html'),
   created: function() {
     if (this.schema_name !== '') {

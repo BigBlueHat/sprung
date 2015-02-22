@@ -40,8 +40,7 @@ window.Sprung = new Vue({
     'import-form': require('./import-form'),
     'thing-list': require('./thing-list'),
     'thing-type-list': require('./thing-type-list'),
-    'thing-notebook-list': require('./thing-notebook-list'),
-    'vue-schema': require('./vue-schema')
+    'thing-notebook-list': require('./thing-notebook-list')
   },
   filters: {
     iconize: require('./filters/iconize')

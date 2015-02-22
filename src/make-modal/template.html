@@ -12,7 +12,12 @@
       </div>
     </div>
     <div class="content">
-      <vue-schema v-with="schema: schema"></vue-schema>
+      <vue-schema v-if="schema_name" v-with="schema: schema"></vue-schema>
+      <div v-if="!schema_name" class="ui form">
+        <div class="field">
+          <textarea>{}</textarea>
+        </div>
+      </div>
     </div>
     <div class="actions">
       <div class="ui black button"
