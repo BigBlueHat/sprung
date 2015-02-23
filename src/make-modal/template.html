@@ -12,8 +12,8 @@
       </div>
     </div>
     <div class="content">
-      <vue-schema v-if="schema_name" v-with="schema: schema"></vue-schema>
-      <div v-if="!schema_name" class="ui form">
+      <vue-schema v-if="schema_url" v-with="id: schema_url"></vue-schema>
+      <div v-if="!schema_url" class="ui form">
         <div class="field">
           <textarea>{}</textarea>
         </div>

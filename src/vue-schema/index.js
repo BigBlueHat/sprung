@@ -1,6 +1,7 @@
 module.exports = {
   data: function() {
     return {
+      id: '',
       schema: {}
     };
   },
@@ -19,7 +20,29 @@ module.exports = {
       return types[value];
     }
   },
+  watch: {
+    id: function() {
+      this.fetchSchema();
+    }
+  },
   methods: {
+    fetchSchema: function() {
+      if (!this.id) return false;
+      var xhr = new XMLHttpRequest(),
+          self = this;
+      xhr.open('GET', self.id);
+      xhr.onload = function () {
+        self.schema = JSON.parse(xhr.responseText);
+        if (self.schema.title) {
+          self.$parent.name = self.schema.title;
+          delete self.schema.title;
+        } else {
+          self.$parent.name = self.id;
+        }
+      };
+      xhr.send();
+
+    },
     output: function() {
       var jsonDOM = this.$el.querySelectorAll('[data-json]');
       var json = {};

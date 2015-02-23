@@ -23,10 +23,19 @@ window.Sprung = new Vue({
     openMakeModal: function(schema_name) {
       // with no thing ID provided, open a blank editing form
       var app = this;
+      var schema_url = '_rewrite/schemas/' + schema_name;
+      var data = {};
+      if (schema_name) {
+        data = {
+          schema_url: schema_url
+        };
+      } else {
+        data = {
+          name: 'Anything'
+        };
+      }
       var modal = new MakeModal({
-        data: {
-          schema_name: schema_name
-        },
+        data: data,
         destroyed: function() {
           app.ui.modalIsOpen = false
         }

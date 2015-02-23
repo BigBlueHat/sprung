@@ -1,44 +1,25 @@
 var Vue = require('vue');
 
+// TODO: require VueSchema (can't...it's using pure >_<)
+// setup openMakeModal('vue-schema', 'schema-name');
+// ... uses VueSchema to create HTML
+// ... which it puts in the body of the modal
+// ... and MakeModal sets the header
+// or openMakeModal('...form?...')
+// someother thing generates (or GETs) the HTML form
+// ... and gives MakeModal a header
 module.exports = Vue.extend({
   data: function() {
     return {
       name: '',
-      schema_name: '',
-      schema: {}
+      schema_url: ''
     };
-  },
-  computed: {
-    apiUrl: function() {
-      return '_rewrite/schemas/' + this.schema_name;
-    }
   },
   components: {
     'vue-schema': require('../vue-schema')
   },
   template: require('./template.html'),
-  created: function() {
-    if (this.schema_name !== '') {
-      this.fetchData();
-    }
-  },
   methods: {
-    fetchData: function () {
-      if (!this.apiUrl) return false;
-      var xhr = new XMLHttpRequest(),
-          self = this;
-      xhr.open('GET', self.apiUrl);
-      xhr.onload = function () {
-        self.schema = JSON.parse(xhr.responseText);
-        if (self.schema.title) {
-          self.name = self.schema.title;
-          delete self.schema.title;
-        } else {
-          self.name = self.schema_name;
-        }
-      };
-      xhr.send();
-    },
     destroy: function() {
       this.$destroy(true);
     }
