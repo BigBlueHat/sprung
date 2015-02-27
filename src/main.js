@@ -1,5 +1,8 @@
 var Vue = require('vue');
+var PouchDB = require('pouchdb');
 var MakeModal = require('./make-modal');
+
+var db = new PouchDB('http://localhost:5984/sprung/');
 
 window.Sprung = new Vue({
   el: 'body',
@@ -40,6 +43,7 @@ window.Sprung = new Vue({
           app.ui.modalIsOpen = false
         }
       });
+      modal._db = db;
       app.ui.modalIsOpen = true;
       modal.$mount();
       modal.$appendTo('body');

@@ -59,7 +59,7 @@ module.exports = {
         }
         return obj;
       }
-      return JSON.stringify(accumulate(json, jsonDOM), null, "\t");
+      return accumulate(json, jsonDOM);
     }
   }
 };

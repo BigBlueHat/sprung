@@ -38,14 +38,15 @@ module.exports = Vue.extend({
       // get doc from editor
       var doc = this.$.editor.output();
       // save doc
-      var xhr = new XMLHttpRequest();
-      // TODO: put this some place better...
-      xhr.open('POST', '../../', true);
-      xhr.setRequestHeader('Content-Type', 'application/json');
-      xhr.onload = function () {
-        console.log(JSON.parse(xhr.responseText));
-      };
-      xhr.send(doc);
+      this._db.post(doc, function(err, resp) {
+        if (err) {
+          // TODO: maybe tell somebody...
+          console.log('error: ', err);
+        } else {
+          // TODO: trigger content reload, etc.
+          self.$destroy(true);
+        }
+      });
     }
   }
 });
