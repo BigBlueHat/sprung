@@ -1,24 +1,23 @@
 <article class="content">
-  <div class="ui four stackable items">
-    <div class="item" v-repeat="items.rows"
+  <div class="ui five doubling cards">
+    <a class="card"
+      v-repeat="items.rows"
       data-thing-id="{{doc._id}}"
       v-on="click: modalMe">
-      <a class="ui left corner label"
+      <span class="ui left corner label"
         v-if="doc.image" title="{{doc.type}}">
         <i class="{{doc.type | iconize}} icon"></i>
-      </a>
+      </span>
       <div class="image"
         v-if="doc.image">
         <img v-attr="src: doc.image" />
       </div>
       <div class="content">
-        <div class="name">
+        <div class="header">
           <i v-if="!doc.image" class="{{doc.type | iconize}} icon"></i>
           {{doc.name}}
         </div>
-        <p v-if="doc.description" class="description">{{{doc.description}}}</p>
-        <p v-if="!doc.description && doc.text" class="description">{{{doc.text}}}</p>
       </div>
-    </div>
+    </a>
   </div>
 </article>

@@ -1,44 +1,50 @@
 <div class="ui dimmer page visible active">
-  <div class="ui test modal transition visible active">
+  <div class="ui fullscreen modal transition visible active scrolling">
     <div class="header">
-      <div class="ui left floated header">
-        <i class="{{type | iconize}} icon"></i>
-        <div class="content">
-          {{name}}
-          <span class="sub header" v-if="author || artist">by {{author}}{{artist}}</span>
+      <div class="ui two column grid">
+        <div class="column">
+          <div class="ui huge header">
+            <i class="{{type | iconize}} icon"></i>
+            <div class="content">
+              {{name}}
+              <span class="sub header" v-if="author || artist">by {{author}}{{artist}}</span>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="ui right floated tiny header">
-        <div class="ui black button"
-          v-on="click: destroy()">
-          Close
+        <div class="right aligned column">
+          <div class="ui button"
+            v-on="click: destroy()">
+            Close
+          </div>
         </div>
       </div>
     </div>
     <div class="content">
-      <div class="left">
-        <img class="ui medium image"
-          v-attr="src: image" />
-        <div class="ui simple ignored divider"></div>
-        <div class="ui labels" v-if="tags">
-          <div class="ui label" v-repeat="tags">{{$value}}</div>
+      <div class="ui grid">
+        <div class="six wide column">
+          <img class="ui medium image"
+            v-attr="src: image" />
+          <div class="ui simple ignored divider"></div>
+          <div class="ui tag labels" v-if="tags">
+            <div class="ui label" v-repeat="tags">{{$value}}</div>
+          </div>
         </div>
-      </div>
-      <div class="right">
-        <div>{{{description}}}</div>
-        <ul v-if="type == 'Book'">
-          <li v-if="author">author: {{author}}</li>
-          <li v-if="price">price: {{price}}</li>
-          <li>publication date: {{$data}}</li>
-          <li>cover: {{cover}}</li>
-          <li>genres: {{genres}}</li>
-          <li>level: {{level}}</li>
-          <li>isbn: {{isbn}}</li>
-        </ul>
+        <div class="ten wide column">
+          <div>{{{description}}}</div>
+          <ul v-if="type == 'Book'">
+            <li v-if="author">author: {{author}}</li>
+            <li v-if="price">price: {{price}}</li>
+            <li>publication date: {{$data}}</li>
+            <li>cover: {{cover}}</li>
+            <li>genres: {{genres}}</li>
+            <li>level: {{level}}</li>
+            <li>isbn: {{isbn}}</li>
+          </ul>
+        </div>
       </div>
     </div>
     <div class="actions">
-      <div class="ui black button"
+      <div class="ui button"
         v-on="click: destroy()">
         Close
       </div>

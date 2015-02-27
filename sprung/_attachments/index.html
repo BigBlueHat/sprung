@@ -7,14 +7,19 @@
 
   <title>Sprung</title>
 
-  <link rel="stylesheet" type="text/css" href="semantic-site_files/css.css" />
-  <link rel="stylesheet" type="text/css" href="semantic-ui/css/semantic.min.css" />
-  <link rel="stylesheet" type="text/css" href="app.css">
+  <link rel="stylesheet" type="text/css" href="semantic-ui/semantic.min.css" />
 
   <style type="text/css">
+  body {
+    padding: 2.5em 1em 1em;
+  }
   body.modaled{
     overflow:hidden;
   }
+  .pushable > .pusher {
+    padding: 3em 1em;
+  }
+  a.launch.item{cursor: pointer}
   .accordion .title.active{position:relative}
   .accordion .content{overflow:auto}
   .ui.active.modal {
@@ -24,20 +29,27 @@
     overflow-y: auto;
     overflow-x: hidden;
   }
+  .ui.visible.left.sidebar ~ .fixed, .ui.visible.left.sidebar ~ .pusher {
+    -webkit-transform: translate3d(18em, 0, 0);
+            transform: translate3d(18em, 0, 0);
+  }
+  .ui.page.dimmer {
+    overflow: auto;
+  }
   </style>
 </head>
-<body id="example"
-  v-class="pushed: ui.sidebarIsOpen,
-    left: ui.sidebarIsOpen,
-    modaled: ui.modalIsOpen">
+<body id="example" class="pushable"
+  v-class="modaled: ui.modalIsOpen">
   <!-- collapsible sidebar -->
   <thing-notebook-list v-with="current: current"></thing-notebook-list>
 
+  <article class="pusher">
   <!-- header menu -->
   <div class="ui fixed transparent inverted main menu">
     <div class="container">
       <a class="launch item" v-on="click: toggleSidebar">
-        <i class="icon list layout"></i>
+        <i class="icon list"
+          v-class="layout: !ui.sidebarIsOpen, close: ui.sidebarIsOpen"></i>
         <span v-if="current.notebook_name">{{current.notebook_name}}</span>
         <span v-if="!current.notebook_name">Notebooks</span>
       </a>
@@ -65,8 +77,8 @@
           Import
         </a>
               <form class="ui form" style="display:none"
-                v-component="import-form">
-                <input id="export-file" v-on="change: processImport" type="file" />
+                >
+                <input id="export-file" v-on="change: processImport()" type="file" />
               </form>
 
         <a class="icon github item" href="https://github.com/bigbluehat/sprung">
@@ -86,6 +98,7 @@
     </div>
   </div>
   <thing-list v-with="notebook: current.notebook, type: current.type"></thing-list>
+  </article>
 
   <script src="app.js"></script>
 </body>

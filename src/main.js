@@ -52,6 +52,7 @@ window.Sprung = new Vue({
     'thing-notebook-list': require('./thing-notebook-list')
   },
   filters: {
-    iconize: require('./filters/iconize')
+    iconize: require('./filters/iconize'),
+    truncate: require('./filters/truncate')
   }
 });

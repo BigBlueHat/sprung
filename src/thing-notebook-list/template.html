@@ -1,5 +1,6 @@
-<div class="ui large vertical inverted labeled sidebar menu" id="menu"
-  v-class="active: $root.ui.sidebarIsOpen">
+<div class="ui large left vertical inverted labeled sidebar menu" id="menu"
+  v-class="uncover: $root.ui.sidebarIsOpen,
+    visible: $root.ui.sidebarIsOpen">
     <a class="item" v-on="click: unsetCurrent()" v-class="active: current.notebook == false">
       All
     </a>
