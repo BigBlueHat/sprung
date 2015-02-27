@@ -4,6 +4,7 @@ module.exports = {
   data: function() {
     return {
       apiUrl: '_view/notebooks?reduce=false',
+      current: {},
       items: []
     };
   },
