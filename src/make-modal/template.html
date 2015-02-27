@@ -21,12 +21,7 @@
       </div>
     </div>
     <div class="content">
-      <vue-schema v-if="schema_url" v-with="id: schema_url"></vue-schema>
-      <div v-if="!schema_url" class="ui form">
-        <div class="field">
-          <textarea>{}</textarea>
-        </div>
-      </div>
+      <div v-ref="editor" v-component="{{editor}}" v-with="id: schema_url"></div>
     </div>
     <div class="actions">
       <div class="ui tiny buttons">

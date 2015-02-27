@@ -15,13 +15,37 @@ module.exports = Vue.extend({
       schema_url: ''
     };
   },
+  computed: {
+    editor: function() {
+      if (this.schema_url !== '') {
+        return 'vue-schema';
+      } else {
+        return 'anything-editor';
+      }
+    }
+  },
   components: {
-    'vue-schema': require('../vue-schema')
+    'vue-schema': require('../vue-schema'),
+    'anything-editor': require('../anything-editor')
   },
   template: require('./template.html'),
   methods: {
     destroy: function() {
       this.$destroy(true);
+    },
+    save: function() {
+      var self = this;
+      // get doc from editor
+      var doc = this.$.editor.output();
+      // save doc
+      var xhr = new XMLHttpRequest();
+      // TODO: put this some place better...
+      xhr.open('POST', '../../', true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.onload = function () {
+        console.log(JSON.parse(xhr.responseText));
+      };
+      xhr.send(doc);
     }
   }
 });
