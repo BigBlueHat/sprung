@@ -35,7 +35,7 @@ module.exports = {
         self.schema = JSON.parse(xhr.responseText);
         if (self.schema.title) {
           self.$parent.name = self.schema.title;
-          delete self.schema.title;
+          self.schema.title = '';
         } else {
           self.$parent.name = self.id;
         }
