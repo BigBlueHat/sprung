@@ -9,9 +9,11 @@ module.exports = Vue.extend({
     };
   },
   components: {
+    // TODO: make these dynamic...somehow
     'anything-editor': require('../anything-editor'),
     'editor-markdown': require('../editor-markdown'),
-    'vue-schema': require('../vue-schema')
+    'vue-schema': require('../vue-schema'),
+    'type-springpad-note-editor': require('../type-springpad-note-editor')
   },
   template: require('./template.html'),
   methods: {

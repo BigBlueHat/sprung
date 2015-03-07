@@ -1,0 +1,40 @@
+<!--
+{
+  "_id": "103e8bee-e447-43ae-b791-32709842f450",
+  "_rev": "1-ad04e4f1e7a37b737b05cfc49acc0498",
+  "tags": [
+    "O'Reilly Webcast",
+    "2010"
+  ],
+  "text": "<a href=\"http://www.oreillynet.com/pub/au/4651\">Benjamin Young</a> \nhas been working his way through technologies for the last decade, \ngradually moving from ASP to Apache Cocoon to PHP to Apache CouchDB. His\n search for a &quot;tangible&quot; data store with a user friendly API has landed \nhim at CouchOne where he works on User Experience design for \napplications using CouchDB. Prior to joining CouchOne, he was principle \nat BigBlueHat where he developed BlueInk, a PHP/MySQL CMS which he is \nnow porting to CouchDB. His other PHP/MySQL experiences include many \ncustom applications for Intranets and mobile devices, five years with \nthe dotProject development team, and a development team member with \nweb2project, the dotProject fork.Â ",
+  "complete": false,
+  "created": "2013-07-31T17:36:56+0000",
+  "liked": false,
+  "name": "2010 Speaker Bio",
+  "notebooks": [
+    "1030cfcd-4d10-4f78-b6fb-4a578c672fa9"
+  ],
+  "image": null,
+  "uuid": "103e8bee-e447-43ae-b791-32709842f450",
+  "public": false,
+  "type": "Note",
+  "modified": "2013-09-04T12:55:13+0000"
+}
+-->
+<div class="ui two column grid">
+  <div class="column">
+    <div class="ui tag labels" v-if="tags">
+      <div class="ui label" v-repeat="tags">{{$value}}</div>
+    </div>
+  </div>
+  <div class="column">
+    <div class="ui mini divided horizontal list">
+      <div class="item"><i v-class="disabled: !liked, red: liked" class="heart icon"></i></div>
+      <div class="item"><i v-class="disabled: !complete, green: complete" class="check circle outline icon"></i></div>
+      <div class="item">Created: {{created}}</div>
+      <div class="item">Modified: {{modified}}</div>
+    </div>
+  </div>
+</div>
+
+<div class="ui basic segment">{{{text}}}</div>

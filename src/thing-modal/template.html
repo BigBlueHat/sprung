@@ -20,7 +20,8 @@
       </div>
     </div>
     <div class="content">
-      <div class="ui grid">
+      <div v-if="viewer" v-component="{{viewer}}" v-with="$data"></div>
+      <div v-if="!viewer" class="ui grid">
         <div class="six wide column">
           <img class="ui medium image"
             v-attr="src: image" />
