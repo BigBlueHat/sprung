@@ -13,7 +13,7 @@ module.exports = Vue.extend({
     'anything-editor': require('../anything-editor'),
     'editor-markdown': require('../editor-markdown'),
     'vue-schema': require('../vue-schema'),
-    'type-springpad-note-editor': require('../type-springpad-note-editor')
+    'springpad-note': require('../types/springpad-note').editor
   },
   template: require('./template.html'),
   methods: {

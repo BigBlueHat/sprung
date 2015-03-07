@@ -8,7 +8,7 @@ module.exports = Vue.extend({
   computed: {
     viewer: function() {
       if (this.type == 'Note') {
-        return 'type-springpad-note';
+        return 'springpad-note';
       } else {
         return false;
       }
@@ -36,6 +36,6 @@ module.exports = Vue.extend({
     }
   },
   components: {
-    'type-springpad-note': require('../type-springpad-note')
+    'springpad-note': require('../types/springpad-note').viewer
   }
 });
