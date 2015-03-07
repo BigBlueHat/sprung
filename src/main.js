@@ -41,8 +41,8 @@ window.Sprung = new Vue({
         };
       } else {
         data = {
-          editor: 'anything-editor',
-          name: 'Anything'
+          editor: 'json',
+          name: 'JSON'
         };
       }
       var modal = new MakeModal({

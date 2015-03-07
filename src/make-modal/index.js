@@ -10,7 +10,7 @@ module.exports = Vue.extend({
   },
   components: {
     // TODO: make these dynamic...somehow
-    'anything-editor': require('../anything-editor'),
+    'json': require('../types/json').editor,
     'markdown': require('../types/markdown').editor,
     'vue-schema': require('../vue-schema'),
     'springpad-note': require('../types/springpad-note').editor
