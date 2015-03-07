@@ -50,7 +50,13 @@ module.exports = {
       function accumulate(obj, dom) {
         for (var i = 0; i < dom.length; i++) {
           if (dom[i].dataset['json'] == 'kvp') {
-            obj[dom[i].querySelector('label').textContent] = dom[i].querySelector('input').value;
+            var key = dom[i].querySelector('label').textContent;
+            var value = '';
+            if (dom[i].querySelector('input') !== null) {
+              obj[key] = dom[i].querySelector('input').value;
+            } else {
+              obj[key] = dom[i].querySelector('textarea').value;
+            }
           } else if (dom[i].dataset['json'] == 'object') {
             var legend = dom[i].querySelector('legend').textContent;
             var sub_dom = dom[i].querySelectorAll('[data-json]');
