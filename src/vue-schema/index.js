@@ -50,7 +50,7 @@ module.exports = {
       function accumulate(obj, dom) {
         for (var i = 0; i < dom.length; i++) {
           if (dom[i].dataset['json'] == 'kvp') {
-            var key = dom[i].querySelector('label').textContent;
+            var key = dom[i].querySelector('label').getAttribute('for');
             var value = '';
             if (dom[i].querySelector('input') !== null) {
               obj[key] = dom[i].querySelector('input').value;
@@ -58,7 +58,7 @@ module.exports = {
               obj[key] = dom[i].querySelector('textarea').value;
             }
           } else if (dom[i].dataset['json'] == 'object') {
-            var legend = dom[i].querySelector('legend').textContent;
+            var legend = dom[i].querySelector('legend').getAttribute('data-key');
             var sub_dom = dom[i].querySelectorAll('[data-json]');
             obj[legend] = accumulate({}, sub_dom);
             i += sub_dom.length;
