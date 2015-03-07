@@ -1,5 +1,6 @@
 var Vue = require('vue');
 var PouchDB = require('pouchdb');
+
 var MakeModal = require('./make-modal');
 
 var db = new PouchDB('http://localhost:5984/sprung/');
@@ -23,17 +24,24 @@ window.Sprung = new Vue({
     importFile: function() {
       document.getElementById('export-file').click()
     },
-    openMakeModal: function(schema_name) {
+    openMakeModal: function(editor, schema_name) {
       // with no thing ID provided, open a blank editing form
       var app = this;
       var schema_url = '_rewrite/schemas/' + schema_name;
       var data = {};
-      if (schema_name) {
+      if (editor && schema_name) {
         data = {
+          editor: 'vue-schema',
           schema_url: schema_url
+        };
+      } else if (editor) {
+        data = {
+          editor: editor,
+          name: '...something...'
         };
       } else {
         data = {
+          editor: 'anything-editor',
           name: 'Anything'
         };
       }

@@ -12,21 +12,15 @@ module.exports = Vue.extend({
   data: function() {
     return {
       name: '',
+      editor: '',
       schema_url: ''
     };
   },
-  computed: {
-    editor: function() {
-      if (this.schema_url !== '') {
-        return 'vue-schema';
-      } else {
-        return 'anything-editor';
-      }
-    }
-  },
   components: {
+    'anything-editor': require('../anything-editor'),
+    'editor-markdown': require('../editor-markdown'),
     'vue-schema': require('../vue-schema'),
-    'anything-editor': require('../anything-editor')
+
   },
   template: require('./template.html'),
   methods: {

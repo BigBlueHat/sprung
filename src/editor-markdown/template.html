@@ -1,0 +1,16 @@
+<div class="ui form">
+  <div class="field">
+    <label for="name">Name</label>
+    <input v-model="name">
+  </div>
+  <div class="ui two column grid">
+    <div class="column">
+      <div class="field">
+        <textarea v-model="content"></textarea>
+      </div>
+    </div>
+    <div class="column">
+      <div class="ui segment" v-html="content | marked"></div>
+    </div>
+  </div>
+</div>
