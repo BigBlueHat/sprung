@@ -6,7 +6,7 @@ module.exports = function(v, k) {
     album: 'music',
     business: 'building',
     checklist: 'list',
-    contact: 'phone sign',
+    contact: 'call',
     'event': 'calendar',
     movie: 'video',
     note: 'text file',
@@ -14,7 +14,7 @@ module.exports = function(v, k) {
     recipe: 'browser',
     task: 'checkmark sign',
     'tv show': 'desktop',
-    wine: 'glass'
+    wine: 'cocktail'
   };
   return type_to_icon[l] || l;
 };
