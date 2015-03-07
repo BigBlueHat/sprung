@@ -55,6 +55,14 @@ data in.
 Once that's done, visit the URL `couchapp.py` gives you. Which will be
 something like: `http://localhost:5984/sprung/_design/sprung/index.html`
 
+## oEmbed
+
+Currently, Sprung uses oEmbed data for videos provided by
+[oembedapi.com](http://oembedapi.com/). You should update the
+`src/types/springpad-video/index.js` file to set the `origin` query paramater
+properly or to use an alternate oEmbed retrieval API such as
+[iframe.ly](http://iframe.ly/).
+
 ## Future
 
 Springpad.com (may it rest in peace) was very close to a

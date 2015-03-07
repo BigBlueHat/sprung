@@ -7,8 +7,8 @@ module.exports = Vue.extend({
   template: require('./template.html'),
   computed: {
     viewer: function() {
-      if (this.type == 'Note') {
-        return 'springpad-note';
+      if (this.type == 'Note' || this.type == 'Video') {
+        return 'springpad-' + this.type.toLowerCase();
       } else if (this.$options.components[this.type.toLowerCase()]) {
         return this.type.toLowerCase();
       } else {
@@ -39,6 +39,7 @@ module.exports = Vue.extend({
   },
   components: {
     'markdown': require('../types/markdown').viewer,
-    'springpad-note': require('../types/springpad-note').viewer
+    'springpad-note': require('../types/springpad-note').viewer,
+    'springpad-video': require('../types/springpad-video').viewer
   }
 });

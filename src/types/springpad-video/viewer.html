@@ -1,0 +1,19 @@
+<div class="ui two column grid">
+  <div class="column">
+    <div class="ui tag labels" v-if="tags">
+      <div class="ui label" v-repeat="tags">{{$value}}</div>
+    </div>
+  </div>
+  <div class="column">
+    <div class="ui mini divided horizontal list">
+      <div class="item"><i v-class="disabled: !liked, red: liked" class="heart icon"></i></div>
+      <div class="item"><i v-class="disabled: !complete, green: complete" class="check circle outline icon"></i></div>
+      <div class="item">Created: {{created}}</div>
+      <div class="item">Modified: {{modified}}</div>
+    </div>
+  </div>
+</div>
+
+<div class="ui basic segment">
+  <o-embed embed-url="{{url}}"></o-embed>
+</div>
