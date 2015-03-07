@@ -9,6 +9,8 @@ module.exports = Vue.extend({
     viewer: function() {
       if (this.type == 'Note') {
         return 'springpad-note';
+      } else if (this.$options.components[this.type.toLowerCase()]) {
+        return this.type.toLowerCase();
       } else {
         return false;
       }
@@ -36,6 +38,7 @@ module.exports = Vue.extend({
     }
   },
   components: {
+    'markdown': require('../types/markdown').viewer,
     'springpad-note': require('../types/springpad-note').viewer
   }
 });
