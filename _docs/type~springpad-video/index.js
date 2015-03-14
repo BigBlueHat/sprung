@@ -56,26 +56,25 @@ var components = {
   }
 };
 
-module.exports = {
-  viewer: {
-    template: require('./viewer.html'),
-    data: data,
-    components: components
-  },
-  editor: {
-    template: require('./editor.html'),
-    replace: true,
-    data: data,
-    components: components,
-    methods: {
-      output: function() {
-        var oembed = this.$.preview.oembed;
-        this.name = oembed.title;
-        this.image = oembed.thumbnail_url;
-        this.videos.push(this.url);
-        // TODO: store the HTML to avoid hitting the oEmbed API constantly
-        return this.$data;
-      }
+Vue.component('springpad-video-viewer', {
+  template: require('./viewer.html'),
+  data: data,
+  components: components
+});
+
+Vue.component('springpad-video-editor', {
+  template: require('./editor.html'),
+  replace: true,
+  data: data,
+  components: components,
+  methods: {
+    output: function() {
+      var oembed = this.$.preview.oembed;
+      this.name = oembed.title;
+      this.image = oembed.thumbnail_url;
+      this.videos.push(this.url);
+      // TODO: store the HTML to avoid hitting the oEmbed API constantly
+      return this.$data;
     }
   }
-};
+});

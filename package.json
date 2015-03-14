@@ -7,6 +7,7 @@
   "repository": "https://github.com/BigBlueHat/sprung.git",
   "main": "src/main.js",
   "dependencies": {
+    "jsinclude": "~1.0.2",
     "marked": "~0.3.3",
     "pouchdb": "~3.2.0",
     "vue": "~0.11.5"

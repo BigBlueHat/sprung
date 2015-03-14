@@ -13,8 +13,7 @@ module.exports = Vue.extend({
     'json': require('../types/json').editor,
     'markdown': require('../types/markdown').editor,
     'vue-schema': require('../vue-schema'),
-    'springpad-note': require('../types/springpad-note').editor,
-    'springpad-video': require('../types/springpad-video').editor
+    'springpad-note': require('../types/springpad-note').editor
   },
   template: require('./template.html'),
   methods: {
