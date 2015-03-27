@@ -1,9 +1,14 @@
 var Vue = require('vue');
 var PouchDB = require('pouchdb');
+var include = require('jsinclude');
 
 var MakeModal = require('./make-modal');
 
 var db = new PouchDB('http://localhost:5984/sprung/');
+
+window.Vue = Vue;
+
+Vue.config.debug = true;
 
 window.Sprung = new Vue({
   el: 'body',
@@ -15,7 +20,21 @@ window.Sprung = new Vue({
     current: {
       notebook: false,
       type: false
-    }
+    },
+    types: {}
+  },
+  created: function() {
+    var self = this;
+    db.query('sprung/type_definitions',
+      function(err, resp) {
+        resp.rows.forEach(function(row) {
+          // load type info
+          self.types[row.key] = row.value;
+          // and it's component JS (editor and/or viewer)
+          include.once('/sprung/' + row.id + '/component.js');
+        });
+      }
+    );
   },
   methods: {
     toggleSidebar: function() {
@@ -34,10 +53,13 @@ window.Sprung = new Vue({
           editor: 'vue-schema',
           schema_url: schema_url
         };
-      } else if (editor) {
+      } else if (editor
+          && undefined != this.types[editor]
+          && undefined != this.types[editor]['editor']) {
+            // TODO: this is all terribly tangled...untangle it
         data = {
-          editor: editor,
-          name: '...something...'
+          editor: this.types[editor].editor,
+          name: editor
         };
       } else {
         data = {
