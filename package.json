@@ -19,7 +19,11 @@
     "mocha": "~1.20.0"
   },
   "scripts": {
-    "dev": "browserify -e src/main.js -t partialify -o _design/sprung/_attachments/app.js",
+    "dev": "browserify --debug -e src/main.js -t partialify -o _design/sprung/_attachments/app.js",
+
+    "springpad-note": "browserify --debug -e _docs/type~springpad-note/index.js -t partialify -o _docs/type~springpad-note/_attachments/component.js",
+    "springpad-video": "browserify --debug -e _docs/type~springpad-video/index.js -t partialify -o _docs/type~springpad-video/_attachments/component.js",
+
     "test": "mocha --ui bdd",
     "test-browser": "browserify -t partialify test/*.js --exclude test-bundle.js > test/test-bundle.js"
   }
