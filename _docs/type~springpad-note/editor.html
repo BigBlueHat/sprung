@@ -16,22 +16,22 @@
 </div>
 <div class="inline field" data-json="kvp">
   <label for="rating">Rating</label>
-  <input v-model="rating" type="number">
+  <input v-model="rating" type="number" min="0" max="5">
   <p class="message"><small>Rating of the object (0-5)</small></p>
 </div>
 <div class="inline field" data-json="kvp">
-  <label for="liked">Liked</label>
-  <input v-model="liked">
+  <label for="springpad-note-liked">Liked</label>
+  <input id="springpad-note-liked" type="checkbox" v-model="liked">
   <p class="message"><small>Did the user mark this liked?</small></p>
 </div>
 <div class="inline field" data-json="kvp">
-  <label for="complete">complete</label>
-  <input v-model="complete">
+  <label for="springpad-note-complete">Complete</label>
+  <input id="springpad-note-complete" type="checkbox" v-model="complete">
   <p class="message"><small>Springpad objects can be marked complete (e.g., is the task done? has the movie been watched?)</small></p>
 </div>
 <div class="inline field" data-json="kvp">
-  <label for="public">public</label>
-  <input v-model="public">
+  <label for="springpad-note-public">Public</label>
+  <input id="springpad-note-public" type="checkbox" v-model="public">
   <p class="message"><small>Is this public or not?</small></p>
 </div>
 
