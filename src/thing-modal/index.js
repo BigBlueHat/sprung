@@ -1,7 +1,10 @@
 var Vue = require('vue');
 var PouchDB = require('pouchdb');
 
-var db = new PouchDB('http://localhost:5984/sprung/');
+// TODO: move this to a config lib
+var db_name = location.pathname.split('/')[1];
+var db = new PouchDB(location.protocol + '//' + location.hostname
+    + (location.port ? ':' + location.port : '') + '/' + db_name + '/');
 
 window.Vue = Vue;
 

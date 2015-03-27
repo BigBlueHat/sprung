@@ -2,9 +2,15 @@ var Vue = require('vue');
 var PouchDB = require('pouchdb');
 var include = require('jsinclude');
 
+Vue.config.debug = true;
+
 var MakeModal = require('./make-modal');
 
-var db = new PouchDB('http://localhost:5984/sprung/');
+// TODO: move this to a config lib
+var db_name = location.pathname.split('/')[1];
+var db_url = location.protocol + '//' + location.hostname
+    + (location.port ? ':' + location.port : '') + '/' + db_name + '/';
+var db = new PouchDB(db_url);
 
 window.Vue = Vue;
 
@@ -31,7 +37,7 @@ window.Sprung = new Vue({
           // load type info
           self.types[row.key] = row.value;
           // and it's component JS (editor and/or viewer)
-          include.once('/sprung/' + row.id + '/component.js');
+          include.once(db_url + row.id + '/component.js');
         });
       }
     );
