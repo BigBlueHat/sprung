@@ -16,8 +16,6 @@ module.exports = Vue.extend({
       if (undefined != Sprung.types[this.type]
           && undefined != Sprung.types[this.type]['viewer']) {
         return Sprung.types[this.type]['viewer'];
-      } else if (this.type == 'Note') {
-        return 'springpad-' + this.type.toLowerCase();
       } else if (this.$options.components[this.type.toLowerCase()]) {
         return this.type.toLowerCase();
       } else {
@@ -45,9 +43,5 @@ module.exports = Vue.extend({
         }
       });
     }
-  },
-  components: {
-    'markdown': require('../types/markdown').viewer,
-    'springpad-note': require('../types/springpad-note').viewer
   }
 });
