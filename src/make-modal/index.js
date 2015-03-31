@@ -25,7 +25,7 @@ module.exports = Vue.extend({
   methods: {
     destroy: function() {
       // TODO: this all needs more thought...
-      this.$root.ui.modalIsOpen = false;
+      this.$root.ui.makeModalIsOpen = false;
     },
     save: function() {
       var self = this;

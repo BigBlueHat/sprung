@@ -1,4 +1,4 @@
-<div class="ui dimmer page visible active">
+<div class="ui dimmer page visible" v-class="active: $root.ui.thingModalIsOpen">
   <div class="ui fullscreen modal transition visible active scrolling">
     <div class="header">
       <div class="ui two column grid">
@@ -12,6 +12,10 @@
           </div>
         </div>
         <div class="right aligned column">
+          <div class="ui button"
+            v-on="click: edit()">
+            Edit
+          </div>
           <div class="ui button"
             v-on="click: destroy()">
             Close
@@ -48,6 +52,10 @@
       <div class="ui left floated red button"
         v-on="click: remove()">
         Delete
+      </div>
+      <div class="ui button"
+        v-on="click: edit()">
+        Edit
       </div>
       <div class="ui button"
         v-on="click: destroy()">

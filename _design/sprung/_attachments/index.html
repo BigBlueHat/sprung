@@ -39,7 +39,7 @@
   </style>
 </head>
 <body id="example" class="pushable"
-  v-class="modaled: ui.modalIsOpen">
+  v-class="modaled: ui.makeModalIsOpen">
   <!-- collapsible sidebar -->
   <thing-notebook-list v-with="current: current"></thing-notebook-list>
 
@@ -102,7 +102,8 @@
   <thing-list v-with="notebook: current.notebook, type: current.type"></thing-list>
   </article>
 
-  <make-modal v-show="ui.modalIsOpen" v-with="modal"></make-modal>
+  <make-modal v-with="makeModal"></make-modal>
+  <thing-modal v-with="thingModal.doc"></thing-modal>
 
   <script src="app.js"></script>
 </body>

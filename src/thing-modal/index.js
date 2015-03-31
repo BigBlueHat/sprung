@@ -1,4 +1,3 @@
-var Vue = require('vue');
 var PouchDB = require('pouchdb');
 
 // TODO: move this to a config lib
@@ -6,9 +5,7 @@ var db_name = location.pathname.split('/')[1];
 var db = new PouchDB(location.protocol + '//' + location.hostname
     + (location.port ? ':' + location.port : '') + '/' + db_name + '/');
 
-window.Vue = Vue;
-
-module.exports = Vue.extend({
+module.exports = {
   template: require('./template.html'),
   computed: {
     viewer: function() {
@@ -28,7 +25,14 @@ module.exports = Vue.extend({
   },
   methods: {
     destroy: function() {
-      this.$destroy(true);
+      // TODO: this all needs more thought...
+      this.$root.ui.thingModalIsOpen = false;
+    },
+    edit: function() {
+      // TODO: ...this is terrible...
+      this.$root.ui.thingModalIsOpen = false;
+      this.$root.makeModal.doc = this.$root.thingModal.doc;
+      this.$root.openMakeModal(this.$data.type);
     },
     remove: function() {
       var self = this;
@@ -39,9 +43,9 @@ module.exports = Vue.extend({
           // TODO: use a $dipatch to trigger DOM removal instead
           var el = document.querySelector('[data-thing-id="' + self.$data._id + '"]');
           el.__vue__.$destroy(true);
-          self.$destroy(true);
+          self.destroy();
         }
       });
     }
   }
-});
+};

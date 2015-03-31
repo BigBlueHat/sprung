@@ -1,5 +1,3 @@
-var ThingModal = require('../thing-modal');
-
 module.exports = {
   replace: true,
   template: require('./template.html'),
@@ -56,16 +54,8 @@ module.exports = {
       xhr.send();
     },
     modalMe: function(ev) {
-      var app = this.$root;
-      var modal = new ThingModal({
-        data: ev.targetVM.doc,
-        destroyed: function() {
-          app.ui.modalIsOpen = false
-        }
-      });
-      app.ui.modalIsOpen = true;
-      modal.$mount();
-      modal.$appendTo('body');
+      this.$root.thingModal.doc = ev.targetVM.doc;
+      this.$root.ui.thingModalIsOpen = true;
     }
   }
 };
