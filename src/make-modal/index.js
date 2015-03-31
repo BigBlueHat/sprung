@@ -7,14 +7,16 @@ var db_url = location.protocol + '//' + location.hostname
     + (location.port ? ':' + location.port : '') + '/' + db_name + '/';
 var db = new PouchDB(db_url);
 
+var default_data = {
+  name: '',
+  editor: '',
+  schema_url: '',
+  doc: {}
+};
+
 module.exports = Vue.extend({
   data: function() {
-    return {
-      name: '',
-      editor: '',
-      schema_url: '',
-      doc: {}
-    };
+    return default_data;
   },
   components: {
     // TODO: make these dynamic...somehow
@@ -25,6 +27,7 @@ module.exports = Vue.extend({
   methods: {
     destroy: function() {
       // TODO: this all needs more thought...
+      this.$root.makeModal = default_data;
       this.$root.ui.makeModalIsOpen = false;
     },
     save: function() {
