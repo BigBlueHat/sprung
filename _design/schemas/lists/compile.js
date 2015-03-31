@@ -2,7 +2,7 @@ function(head, req) {
   var all_schemas = {};
   var other_schema;
   while(row = getRow()) {
-    all_schemas[row.key] = row.doc;
+    all_schemas[row.key] = row.doc.schema;
   }
 
   for (var schema in all_schemas) {

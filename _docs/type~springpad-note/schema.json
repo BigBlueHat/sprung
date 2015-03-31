@@ -1,5 +1,4 @@
 {
-  "_id": "schema|springpad-note",
   "title": "Springpad Note",
   "type": "object",
   "extends": "springpad-object",
