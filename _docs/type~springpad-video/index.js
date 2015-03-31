@@ -1,15 +1,17 @@
 var data = function() {
   return {
-    "name": "",
-    "url": "",
-    "description": "",
-    "image": "",
-    "videos": [],
-    "tags": [],
-    "public": false,
-    "complete": false,
-    "liked": false,
-    "type": "Video",
+    doc: {
+      "name": "",
+      "url": "",
+      "description": "",
+      "image": "",
+      "videos": [],
+      "tags": [],
+      "public": false,
+      "complete": false,
+      "liked": false,
+      "type": "Video",
+    }
   }
 };
 
@@ -70,11 +72,11 @@ Vue.component('springpad-video-editor', {
   methods: {
     output: function() {
       var oembed = this.$.preview.oembed;
-      this.name = oembed.title;
-      this.image = oembed.thumbnail_url;
-      this.videos.push(this.url);
+      this.doc.name = oembed.title;
+      this.doc.image = oembed.thumbnail_url;
+      this.doc.videos.push(this.url);
       // TODO: store the HTML to avoid hitting the oEmbed API constantly
-      return this.$data;
+      return this.$data.doc;
     }
   }
 });

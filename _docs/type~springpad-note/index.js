@@ -7,19 +7,21 @@ Vue.component('springpad-note-editor', {
   replace: true,
   data: function() {
     return {
-      "name": "",
-      "text": "",
-      "image": "",
-      "tags": [],
-      "public": false,
-      "complete": false,
-      "liked": false,
-      "type": "Note",
+      doc: {
+        "name": "",
+        "text": "",
+        "image": "",
+        "tags": [],
+        "public": false,
+        "complete": false,
+        "liked": false,
+        "type": "Note",
+      }
     }
   },
   methods: {
     output: function() {
-      return this.$data;
+      return this.$data.doc;
     }
   }
 });

@@ -1,37 +1,37 @@
 <form class="ui horizontal form">
 <div class="inline field" data-json="kvp">
   <label for="name">Name</label>
-  <input v-model="name" type="text">
+  <input v-model="doc.name" type="text">
   <p class="message"><small>Name or title of the object</small></p>
 </div>
 <div class="inline field" data-json="kvp">
   <label for="text">Text</label>
-  <textarea v-model="text"></textarea>
+  <textarea v-model="doc.text"></textarea>
   <p class="message"><small>The contents of the note (may be HTML-formatted)</small></p>
 </div>
 <div class="inline field" data-json="kvp">
   <label for="tags">Tags</label>
-  <input v-model="tags">
+  <input v-model="doc.tags">
   <p class="message"><small>List of tags</small></p>
 </div>
 <div class="inline field" data-json="kvp">
   <label for="rating">Rating</label>
-  <input v-model="rating" type="number" min="0" max="5">
+  <input v-model="doc.rating" type="number" min="0" max="5">
   <p class="message"><small>Rating of the object (0-5)</small></p>
 </div>
 <div class="inline field" data-json="kvp">
   <label for="springpad-note-liked">Liked</label>
-  <input id="springpad-note-liked" type="checkbox" v-model="liked">
+  <input id="springpad-note-liked" type="checkbox" v-model="doc.liked">
   <p class="message"><small>Did the user mark this liked?</small></p>
 </div>
 <div class="inline field" data-json="kvp">
   <label for="springpad-note-complete">Complete</label>
-  <input id="springpad-note-complete" type="checkbox" v-model="complete">
+  <input id="springpad-note-complete" type="checkbox" v-model="doc.complete">
   <p class="message"><small>Springpad objects can be marked complete (e.g., is the task done? has the movie been watched?)</small></p>
 </div>
 <div class="inline field" data-json="kvp">
   <label for="springpad-note-public">Public</label>
-  <input id="springpad-note-public" type="checkbox" v-model="public">
+  <input id="springpad-note-public" type="checkbox" v-model="doc.public">
   <p class="message"><small>Is this public or not?</small></p>
 </div>
 

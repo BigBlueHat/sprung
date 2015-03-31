@@ -1,10 +1,10 @@
 <form class="ui horizontal form">
   <div class="inline field">
     <label for="url">URL</label>
-    <input v-model="url" type="text">
+    <input v-model="doc.url" type="text">
     <p class="message"><small>URL of the video</small></p>
   </div>
   <div class="ui basic segment">
-    <o-embed v-ref="preview" embed-url="{{url}}"></o-embed>
+    <o-embed v-ref="preview" embed-url="{{doc.url}}"></o-embed>
   </div>
 </form>
