@@ -1,4 +1,7 @@
 module.exports = function(v, k) {
+  if (undefined == v) {
+    return v;
+  }
   var l = v.toLowerCase();
   // TODO: ugh...this should be pulled out somewher
   var type_to_icon = {

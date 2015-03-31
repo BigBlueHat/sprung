@@ -10,9 +10,12 @@ module.exports = {
   computed: {
     viewer: function() {
       // TODO: uses a global var >_<
-      if (undefined != Sprung.types[this.type]
-          && undefined != Sprung.types[this.type]['viewer']) {
-        return Sprung.types[this.type]['viewer'];
+      if (undefined == this.type) {
+        return false;
+      }
+      if (undefined != this.$root.types[this.type]
+          && undefined != this.$root.types[this.type]['viewer']) {
+        return this.$root.types[this.type]['viewer'];
       } else if (this.$options.components[this.type.toLowerCase()]) {
         return this.type.toLowerCase();
       } else {

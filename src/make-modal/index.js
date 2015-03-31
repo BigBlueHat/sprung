@@ -38,7 +38,7 @@ module.exports = Vue.extend({
           console.log('error: ', err);
         } else {
           // TODO: trigger content reload, etc.
-          self.$destroy(true);
+          self.destroy();
         }
       });
     }
