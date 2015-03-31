@@ -12,13 +12,16 @@
           </div>
         </div>
         <div class="right aligned column">
-          <div class="ui button"
-            v-on="click: edit()">
-            Edit
-          </div>
-          <div class="ui button"
-            v-on="click: destroy()">
-            Close
+          <div class="ui tiny buttons">
+            <div class="ui primary button"
+              v-on="click: edit()">
+              Edit
+            </div>
+            <div class="or"></div>
+            <div class="ui button"
+              v-on="click: destroy()">
+              Close
+            </div>
           </div>
         </div>
       </div>
@@ -53,13 +56,18 @@
         v-on="click: remove()">
         Delete
       </div>
-      <div class="ui button"
-        v-on="click: edit()">
-        Edit
-      </div>
-      <div class="ui button"
-        v-on="click: destroy()">
-        Close
+      <div class="right aligned column">
+        <div class="ui tiny buttons">
+          <div class="ui primary button"
+            v-on="click: edit()">
+            Edit
+          </div>
+          <div class="or"></div>
+          <div class="ui button"
+            v-on="click: destroy()">
+            Close
+          </div>
+        </div>
       </div>
     </div>
   </div>
