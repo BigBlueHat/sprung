@@ -34,7 +34,7 @@ module.exports = {
     edit: function() {
       // TODO: ...this is terrible...
       this.$root.ui.thingModalIsOpen = false;
-      this.$root.makeModal.doc = this.$root.thingModal.doc;
+      this.$root.makeModal.doc = this.$root.current.doc;
       this.$root.openMakeModal(this.$data.type);
     },
     remove: function() {

@@ -24,16 +24,14 @@ window.Sprung = new Vue({
     },
     current: {
       notebook: false,
-      type: false
+      type: false,
+      doc: {}
     },
     types: {},
     makeModal: {
       name: '',
       editor: '',
       schema_url: '',
-      doc: {}
-    },
-    thingModal: {
       doc: {}
     }
   },
