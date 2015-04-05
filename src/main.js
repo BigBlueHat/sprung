@@ -18,21 +18,14 @@ window.Sprung = new Vue({
   el: 'body',
   data: {
     ui: {
-      sidebarIsOpen: false,
-      makeModalIsOpen: false
+      sidebarIsOpen: false
     },
     current: {
       notebook: false,
       type: false,
       doc: {}
     },
-    types: {},
-    makeModal: {
-      name: '',
-      editor: '',
-      schema_url: '',
-      doc: {}
-    }
+    types: {}
   },
   created: function() {
     var self = this;
@@ -54,25 +47,17 @@ window.Sprung = new Vue({
     importFile: function() {
       document.getElementById('export-file').click()
     },
-    openMakeModal: function(editor, schema_name) {
-      // with no thing ID provided, open a blank editing form
-      var self = this;
-      var schema_url = '_rewrite/schemas/' + schema_name;
-
-      if (editor && schema_name) {
-        this.makeModal.editor = 'vue-schema';
-        this.makeModal.schema_url = schema_url;
-      } else if (editor
-          && undefined != this.types[editor]
-          && undefined != this.types[editor]['editor']) {
-            // TODO: this is all terribly tangled...untangle it
-        this.makeModal.editor = this.types[editor].editor;
-        this.makeModal.name = editor;
+    editDoc: function(doc, schema_name) {
+      var modal = this.$addChild(require('./make-modal'));
+      if (schema_name) {
+        modal.$set('schema_url', '_rewrite/schemas/' + schema_name);
       } else {
-        this.makeModal.editor = 'json';
-        this.makeModal.name = 'JSON';
+        modal.$set('schema_url', '');
       }
-      this.ui.makeModalIsOpen = true;
+      modal.$set('doc', doc);
+      modal.$set('active', true);
+      modal.$mount();
+      modal.$appendTo(this.$el);
     },
     viewDoc: function(doc) {
       var modal = this.$addChild(require('./thing-modal'));
@@ -86,7 +71,6 @@ window.Sprung = new Vue({
   },
   components: {
     'import-form': require('./import-form'),
-    'make-modal': require('./make-modal'),
     'thing-list': require('./thing-list'),
     'thing-type-list': require('./thing-type-list'),
     'thing-notebook-list': require('./thing-notebook-list')

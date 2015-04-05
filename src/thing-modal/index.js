@@ -12,6 +12,7 @@ module.exports = {
       doc: ''
     }
   },
+  replace: true,
   template: require('./template.html'),
   computed: {
     viewer: function() {
@@ -37,9 +38,7 @@ module.exports = {
       this.$destroy(true);
     },
     edit: function() {
-      // TODO: ...this is terrible...
-      this.$root.makeModal.doc = this.doc;
-      this.$root.openMakeModal(this.doc.type);
+      this.$root.editDoc(this.doc);
       this.$destroy(true);
     },
     remove: function() {

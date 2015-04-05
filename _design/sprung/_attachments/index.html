@@ -13,9 +13,6 @@
   body {
     padding: 2.5em 1em 1em;
   }
-  body.modaled{
-    overflow:hidden;
-  }
   .pushable > .pusher {
     padding: 3em 1em;
   }
@@ -38,8 +35,7 @@
   }
   </style>
 </head>
-<body id="example" class="pushable"
-  v-class="modaled: ui.makeModalIsOpen">
+<body id="example" class="pushable">
   <!-- collapsible sidebar -->
   <thing-notebook-list v-with="current: current"></thing-notebook-list>
 
@@ -58,17 +54,17 @@
 
       <div class="ui simple compact dropdown item">
         <div class="ui green button"
-          v-on="click: openMakeModal('springpad-note')"><i class="plus icon"></i></div>
+             v-on="click: editDoc({type: 'Note'})"><i class="plus icon"></i></div>
         <i class="dropdown icon"></i>
         <div class="menu">
           <a class="item"
-            v-on="click: openMakeModal('Note')"><strong>Note</strong></a>
+             v-on="click: editDoc({type: 'Note'})"><strong>Note</strong></a>
           <a class="item"
-            v-on="click: openMakeModal('Video')">Video</a>
+             v-on="click: editDoc({type: 'Video'})">Video</a>
           <a class="item"
-            v-on="click: openMakeModal('vue-schema', 'springpad-object')">Object</a>
+             v-on="click: editDoc({}, 'springpad-object')">Object</a>
           <a class="item"
-            v-on="click: openMakeModal()">Anything</a>
+             v-on="click: editDoc({})">Anything</a>
         </div>
       </div>
 
@@ -101,8 +97,6 @@
   </div>
   <thing-list v-with="notebook: current.notebook, type: current.type"></thing-list>
   </article>
-
-  <make-modal v-with="makeModal"></make-modal>
 
   <script src="app.js"></script>
 </body>

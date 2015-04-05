@@ -1,4 +1,3 @@
-var Vue = require('vue');
 var PouchDB = require('pouchdb');
 
 // TODO: move this to a config lib
@@ -8,13 +7,13 @@ var db_url = location.protocol + '//' + location.hostname
 var db = new PouchDB(db_url);
 
 var default_data = {
-  name: '',
-  editor: '',
+  active: false,
+  name: 'JSON',
   schema_url: '',
   doc: {}
 };
 
-module.exports = Vue.extend({
+module.exports = {
   data: function() {
     return default_data;
   },
@@ -23,12 +22,29 @@ module.exports = Vue.extend({
     'json': require('../json-editor'),
     'vue-schema': require('../vue-schema')
   },
+  replace: true,
   template: require('./template.html'),
+  computed: {
+    name: function() {
+      // TODO: make this smarter
+      if (this.doc.type) {
+        return this.doc.type;
+      }
+    },
+    editor: function() {
+      if (this.schema_url) {
+        return 'vue-schema';
+      } else if (this.doc.type && undefined != this.$root.types[this.doc.type]
+          && undefined != this.$root.types[this.doc.type].editor) {
+        return this.$root.types[this.doc.type].editor;
+      } else {
+        return 'json';
+      }
+    }
+  },
   methods: {
     destroy: function() {
-      // TODO: this all needs more thought...
-      this.$root.makeModal = default_data;
-      this.$root.ui.makeModalIsOpen = false;
+      this.$destroy(true);
     },
     save: function() {
       var self = this;
@@ -46,4 +62,4 @@ module.exports = Vue.extend({
       });
     }
   }
-});
+};
