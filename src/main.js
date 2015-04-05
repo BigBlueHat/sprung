@@ -19,8 +19,7 @@ window.Sprung = new Vue({
   data: {
     ui: {
       sidebarIsOpen: false,
-      makeModalIsOpen: false,
-      thingModalIsOpen: false
+      makeModalIsOpen: false
     },
     current: {
       notebook: false,
@@ -74,12 +73,20 @@ window.Sprung = new Vue({
         this.makeModal.name = 'JSON';
       }
       this.ui.makeModalIsOpen = true;
+    },
+    viewDoc: function(doc) {
+      var modal = this.$addChild(require('./thing-modal'));
+      modal.$data = {
+        active: true,
+        doc: doc
+      };
+      modal.$mount();
+      modal.$appendTo(this.$el);
     }
   },
   components: {
     'import-form': require('./import-form'),
     'make-modal': require('./make-modal'),
-    'thing-modal': require('./thing-modal'),
     'thing-list': require('./thing-list'),
     'thing-type-list': require('./thing-type-list'),
     'thing-notebook-list': require('./thing-notebook-list')

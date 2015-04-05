@@ -54,8 +54,7 @@ module.exports = {
       xhr.send();
     },
     modalMe: function(ev) {
-      this.$root.current.doc = ev.targetVM.doc;
-      this.$root.ui.thingModalIsOpen = true;
+      this.$root.viewDoc(ev.targetVM.doc);
     }
   }
 };

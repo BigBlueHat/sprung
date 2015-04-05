@@ -6,18 +6,24 @@ var db = new PouchDB(location.protocol + '//' + location.hostname
     + (location.port ? ':' + location.port : '') + '/' + db_name + '/');
 
 module.exports = {
+  data: function() {
+    return {
+      active: false,
+      doc: ''
+    }
+  },
   template: require('./template.html'),
   computed: {
     viewer: function() {
       // TODO: uses a global var >_<
-      if (undefined == this.type) {
+      if (undefined == this.doc && undefined == this.doc.type) {
         return false;
       }
-      if (undefined != this.$root.types[this.type]
-          && undefined != this.$root.types[this.type]['viewer']) {
-        return this.$root.types[this.type]['viewer'];
-      } else if (this.$options.components[this.type.toLowerCase()]) {
-        return this.type.toLowerCase();
+      if (undefined != this.$root.types[this.doc.type]
+          && undefined != this.$root.types[this.doc.type]['viewer']) {
+        return this.$root.types[this.doc.type]['viewer'];
+      } else if (this.$options.components[this.doc.type.toLowerCase()]) {
+        return this.doc.type.toLowerCase();
       } else {
         return false;
       }
@@ -28,23 +34,22 @@ module.exports = {
   },
   methods: {
     destroy: function() {
-      // TODO: this all needs more thought...
-      this.$root.ui.thingModalIsOpen = false;
+      this.$destroy(true);
     },
     edit: function() {
       // TODO: ...this is terrible...
-      this.$root.ui.thingModalIsOpen = false;
-      this.$root.makeModal.doc = this.$root.current.doc;
-      this.$root.openMakeModal(this.$data.type);
+      this.$root.makeModal.doc = this.doc;
+      this.$root.openMakeModal(this.doc.type);
+      this.$destroy(true);
     },
     remove: function() {
       var self = this;
-      db.remove(self.$data._id, self.$data._rev, function(err, resp) {
+      db.remove(self.doc._id, self.doc._rev, function(err, resp) {
         if (err) {
           console.log('error: ', err);
         } else {
           // TODO: use a $dipatch to trigger DOM removal instead
-          var el = document.querySelector('[data-thing-id="' + self.$data._id + '"]');
+          var el = document.querySelector('[data-thing-id="' + self.doc._id + '"]');
           el.__vue__.$destroy(true);
           self.destroy();
         }

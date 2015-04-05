@@ -1,13 +1,13 @@
-<div class="ui dimmer page visible" v-class="active: $root.ui.thingModalIsOpen">
+<div class="ui dimmer page visible" v-class="active: active">
   <div class="ui fullscreen modal transition visible active scrolling">
     <div class="header">
       <div class="ui two column grid">
         <div class="column">
           <div class="ui huge header">
-            <i class="{{type | iconize}} icon"></i>
+            <i class="{{doc.type | iconize}} icon"></i>
             <div class="content">
-              {{name}}
-              <span class="sub header" v-if="author || artist">by {{author}}{{artist}}</span>
+              {{doc.name}}
+              <span class="sub header" v-if="doc.author || doc.artist">by {{doc.author}}{{doc.artist}}</span>
             </div>
           </div>
         </div>
@@ -27,26 +27,26 @@
       </div>
     </div>
     <div class="content">
-      <div v-if="viewer" v-component="{{viewer}}" v-with="$data"></div>
+      <div v-if="viewer" v-component="{{viewer}}" v-with="doc"></div>
       <div v-if="!viewer" class="ui grid">
         <div class="six wide column">
           <img class="ui medium image"
             v-attr="src: image" />
           <div class="ui simple ignored divider"></div>
-          <div class="ui tag labels" v-if="tags">
+          <div class="ui tag labels" v-if="doc.tags">
             <div class="ui label" v-repeat="tags">{{$value}}</div>
           </div>
         </div>
         <div class="ten wide column">
-          <div>{{{description}}}</div>
-          <ul v-if="type == 'Book'">
-            <li v-if="author">author: {{author}}</li>
-            <li v-if="price">price: {{price}}</li>
-            <li>publication date: {{$data['publication date']}}</li>
-            <li>cover: {{cover}}</li>
-            <li>genres: {{genres}}</li>
-            <li>level: {{level}}</li>
-            <li>isbn: {{isbn}}</li>
+          <div>{{{doc.description}}}</div>
+          <ul v-if="doc.type == 'Book'">
+            <li v-if="doc.author">author: {{doc.author}}</li>
+            <li v-if="doc.price">price: {{doc.price}}</li>
+            <li>publication date: {{doc['publication date']}}</li>
+            <li>cover: {{doc.cover}}</li>
+            <li>genres: {{doc.genres}}</li>
+            <li>level: {{doc.level}}</li>
+            <li>isbn: {{doc.isbn}}</li>
           </ul>
         </div>
       </div>
