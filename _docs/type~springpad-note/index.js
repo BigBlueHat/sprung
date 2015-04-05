@@ -8,20 +8,20 @@ Vue.component('springpad-note-editor', {
   data: function() {
     return {
       doc: {
-        "name": "",
-        "text": "",
-        "image": "",
-        "tags": [],
+        name: "",
+        text: "",
+        image: "",
+        tags: [],
         "public": false,
-        "complete": false,
-        "liked": false,
-        "type": "Note",
+        complete: false,
+        liked: false
       }
     }
   },
   methods: {
     output: function() {
-      return this.$data.doc;
+      this.doc.type = 'Note';
+      return this.doc;
     }
   }
 });
