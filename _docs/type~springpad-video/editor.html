@@ -1,8 +1,8 @@
 <form class="ui horizontal form">
   <div class="inline field">
     <label for="url">URL</label>
-    <input v-model="doc.url" type="text">
-    <p class="message"><small>URL of the video</small></p>
+    <input v-model="doc.url" type="text" placeholder="paste a URL of a Video">
+    <p class="message"><small>or</small></p>
     <file-picker mimetype="video/*"
       v-with="url: doc.url, filename: doc.filename"></file-picker>
   </div>
