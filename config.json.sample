@@ -3,5 +3,10 @@
     "default": {
       "db": "http://{USER}:{PASS}@localhost:5984/{DB}"
     }
+  },
+  "services": {
+    "filepicker.io": {
+      "apikey": "...YOUR KEY HERE..."
+    }
   }
 }

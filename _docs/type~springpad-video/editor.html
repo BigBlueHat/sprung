@@ -3,6 +3,8 @@
     <label for="url">URL</label>
     <input v-model="doc.url" type="text">
     <p class="message"><small>URL of the video</small></p>
+    <file-picker mimetype="video/*"
+      v-with="url: doc.url, filename: doc.filename"></file-picker>
   </div>
   <div class="ui basic segment">
     <o-embed v-ref="preview" embed-url="{{doc.url}}"></o-embed>

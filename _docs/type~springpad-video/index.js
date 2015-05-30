@@ -39,7 +39,6 @@ var components = {
     },
     watch: {
       embedUrl: function() {
-        console.log(this.embedUrl);
         if (!this.embedUrl) return false;
         var self = this;
         var oembed_url = 'http://open.iframe.ly/api/oembed?url='
@@ -74,7 +73,6 @@ Vue.component('springpad-video-editor', {
       var oembed = this.$.preview.oembed;
       this.doc.name = oembed.title;
       this.doc.image = oembed.thumbnail_url;
-      this.doc.videos.push(this.url);
       // TODO: store the HTML to avoid hitting the oEmbed API constantly
       return this.$data.doc;
     }

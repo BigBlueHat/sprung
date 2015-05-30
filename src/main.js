@@ -73,7 +73,8 @@ window.Sprung = new Vue({
     'import-form': require('./import-form'),
     'thing-list': require('./thing-list'),
     'thing-type-list': require('./thing-type-list'),
-    'thing-notebook-list': require('./thing-notebook-list')
+    'thing-notebook-list': require('./thing-notebook-list'),
+    'file-picker': require('./file-picker')
   },
   filters: {
     iconize: require('./filters/iconize'),

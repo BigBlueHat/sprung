@@ -53,7 +53,7 @@ gulp.task('docs', function() {
 
       push(couch_url, doc,
         function(err, resp) {
-          if (err) throw err;
+          if (err) throw JSON.stringify(err);
           console.log(resp);
         });
     });
