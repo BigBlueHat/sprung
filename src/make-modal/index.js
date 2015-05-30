@@ -57,6 +57,7 @@ module.exports = {
           console.log('error: ', err);
         } else {
           // TODO: trigger content reload, etc.
+          self.$dispatch('thingMade', resp.id);
           self.destroy();
         }
       });

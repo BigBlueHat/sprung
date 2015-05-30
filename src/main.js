@@ -79,5 +79,13 @@ window.Sprung = new Vue({
   filters: {
     iconize: require('./filters/iconize'),
     truncate: require('./filters/truncate')
+  },
+  events: {
+    thingMade: function(id) {
+      // feel a bit silly sending this back down
+      // the stack...but not sure how else to do
+      // it without "hard" references to components...which is worse...imo
+      this.$broadcast('thingMade', id);
+    }
   }
 });

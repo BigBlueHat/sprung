@@ -56,5 +56,10 @@ module.exports = {
     modalMe: function(ev) {
       this.$root.viewDoc(ev.targetVM.doc);
     }
+  },
+  events: {
+    thingMade: function(id) {
+      this.fetchData();
+    }
   }
 };
