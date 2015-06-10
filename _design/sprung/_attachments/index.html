@@ -70,15 +70,12 @@
 
       <div class="right menu">
         <a class="icon upload item"
-          v-on="click: importFile">
+           title="pick an export.json file"
+           v-on="click: importFile">
           <i class="icon upload"></i>
           Import
         </a>
-              <form class="ui form" style="display:none"
-                >
-                <input id="export-file" v-on="change: processImport()" type="file" />
-              </form>
-
+        <import-form></import-form>
         <a class="icon github item" href="https://github.com/bigbluehat/sprung">
           <i class="icon github"></i>
         </a>
