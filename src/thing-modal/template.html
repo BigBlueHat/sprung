@@ -31,10 +31,10 @@
       <div v-if="!viewer" class="ui grid">
         <div class="six wide column">
           <img class="ui medium image"
-            v-attr="src: image" />
+            v-attr="src: doc.image" />
           <div class="ui simple ignored divider"></div>
           <div class="ui tag labels" v-if="doc.tags">
-            <div class="ui label" v-repeat="tags">{{$value}}</div>
+            <div class="ui label" v-repeat="doc.tags">{{$value}}</div>
           </div>
         </div>
         <div class="ten wide column">
