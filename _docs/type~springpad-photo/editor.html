@@ -1,0 +1,12 @@
+<form class="ui horizontal form">
+  <div class="inline field">
+    <label for="url">URL</label>
+    <input v-model="doc.url" type="text" placeholder="paste a URL of a Photo">
+    <p class="message"><small>or</small></p>
+    <file-picker mimetype="image/*"
+      v-with="url: doc.url, filename: doc.filename"></file-picker>
+  </div>
+  <div class="ui basic segment">
+    <img v-if="doc.url" class="ui image" src="{{doc.url}}" />
+  </div>
+</form>
