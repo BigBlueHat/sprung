@@ -25,8 +25,10 @@ Sorry. :frowning:
 
 1. Copy `config.json.sample` to `config.json`
 2. Update the URL to match your settings.
-3. `npm install` will install the necessary dev tools and dependencies.
-4. `gulp` to build Sprung and the type definitions and publish them to the URL you set in the `config.json` file.
+3. Copy `config_ui.json.sample` to `config_ui.json`
+4. Update the API key(s) to match your settings.
+5. `npm install` will install the necessary dev tools and dependencies.
+6. `gulp` to build Sprung and the type definitions and publish them to the URL you set in the `config.json` file.
 
 Once that's done, visit the URL based on your CouchDB URL, such as:
 `http://localhost:5984/sprung/_design/sprung/index.html`

@@ -1,5 +1,6 @@
 .couchapprc
 config.json
+config_ui.json
 _design/sprung/_attachments/app.js
 _docs/*/_attachments/component.js
 node_modules/*
