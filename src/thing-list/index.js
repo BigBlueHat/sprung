@@ -1,3 +1,5 @@
+var Draggabilly = require('draggabilly');
+
 module.exports = {
   replace: true,
   template: require('./template.html'),
@@ -54,12 +56,35 @@ module.exports = {
       xhr.send();
     },
     modalMe: function(ev) {
-      this.$root.viewDoc(ev.targetVM.doc);
+      if (undefined == ev.targetVM) {
+        // then, we assume (rashly...) that ev == is the vm
+        this.$root.viewDoc(ev.doc);
+      } else {
+        this.$root.viewDoc(ev.targetVM.doc);
+      }
     }
   },
   events: {
     thingMade: function(id) {
       this.fetchData();
+    }
+  },
+  directives: {
+    draggable: {
+      bind: function() {
+        var self = this;
+        if (self.vm.notebook !== false) {
+          var draggie = new Draggabilly(self.el);
+          draggie.on('staticClick',
+            function(ev, pointer) {
+              self.vm.modalMe(self.vm);
+            });
+        } else {
+          self.el.addEventListener('click', function() {
+            self.vm.modalMe(self.vm);
+          });
+        }
+      }
     }
   }
 };

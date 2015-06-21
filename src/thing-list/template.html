@@ -1,9 +1,9 @@
 <article class="content">
   <div class="ui five doubling cards">
     <a class="card"
+      v-draggable
       v-repeat="items.rows"
-      data-thing-id="{{doc._id}}"
-      v-on="click: modalMe">
+      data-thing-id="{{doc._id}}">
       <span class="ui left corner label"
         v-if="doc.image" title="{{doc.type}}">
         <i class="{{doc.type | iconize}} icon"></i>
