@@ -40,6 +40,11 @@
 </head>
 <body id="example" class="pushable" v-class="loggedIn: loggedIn">
   <!-- collapsible sidebar -->
+  <div class="ui tiny icon launch right attached fixed button"
+       v-on="click: toggleSidebar"
+       v-if="!loggedIn">
+    <i class="content icon"></i>
+  </div>
   <thing-notebook-list v-with="current: current"></thing-notebook-list>
 
   <article class="pusher">
