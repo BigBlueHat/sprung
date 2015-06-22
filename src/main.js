@@ -1,6 +1,8 @@
 var Vue = require('vue');
 var PouchDB = require('pouchdb');
+PouchDB.plugin(require('pouchdb-authentication'));
 var include = require('jsinclude');
+var key = require('keymaster');
 
 Vue.config.debug = true;
 
@@ -20,12 +22,23 @@ window.Sprung = new Vue({
     ui: {
       sidebarIsOpen: false
     },
+    user: {},
     current: {
       notebook: {},
       type: false,
       doc: {}
     },
     types: {}
+  },
+  computed: {
+    loggedIn: function() {
+      if (Object.keys(this.user).length > 0
+          && undefined !== this.user.name) {
+        return true;
+      } else {
+        return false;
+      }
+    }
   },
   created: function() {
     var self = this;
@@ -39,6 +52,41 @@ window.Sprung = new Vue({
         });
       }
     );
+    db.getSession(function(err, resp) {
+      if (err) {
+        // network error
+      } else if (!resp.userCtx.name) {
+        // nobody's logged in
+      } else {
+        // resp.userCtx.name is the current user
+        self.user = resp.userCtx;
+      }
+    });
+  },
+  ready: function() {
+    var self = this;
+
+    // listen for document-wide keyboard events
+    key('ctrl+shift+l', function() {
+      db.getSession(function (err, resp) {
+        if (err) {
+          // network error
+        } else if (!resp.userCtx.name) {
+          // reset the user to empty
+          // TODO: should trigger UI changes
+          self.user = {};
+          // open login modal
+          var modal = self.$addChild(require('./login-modal'));
+          modal.$mount();
+          modal.$appendTo(document.body);
+        } else{
+          // response.userCtx.name is the current user
+          self.user = resp.userCtx;
+
+        }
+      });
+      return false;
+    });
   },
   methods: {
     toggleSidebar: function() {
@@ -67,6 +115,19 @@ window.Sprung = new Vue({
       };
       modal.$mount();
       modal.$appendTo(this.$el);
+    },
+    logout: function() {
+      var self = this;
+      // TODO: make this data state driven
+      db.logout(function (err, response) {
+        if (err) {
+          // network error
+          console.log('error', err);
+        } else {
+          // empty user so loggedIn === false
+          self.user = {};
+        }
+      });
     }
   },
   components: {

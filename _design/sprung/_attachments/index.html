@@ -14,6 +14,9 @@
     padding: 2.5em 1em 1em;
   }
   .pushable > .pusher {
+    padding: 1em;
+  }
+  .loggedIn.pushable > .pusher {
     padding: 3em 1em;
   }
   a.launch.item{cursor: pointer}
@@ -35,13 +38,13 @@
   }
   </style>
 </head>
-<body id="example" class="pushable">
+<body id="example" class="pushable" v-class="loggedIn: loggedIn">
   <!-- collapsible sidebar -->
   <thing-notebook-list v-with="current: current"></thing-notebook-list>
 
   <article class="pusher">
   <!-- header menu -->
-  <div class="ui fixed transparent inverted main menu">
+  <div v-if="loggedIn" class="ui fixed transparent inverted main menu">
     <div class="container">
       <a class="launch item" v-on="click: toggleSidebar">
         <i class="icon list"
@@ -78,6 +81,9 @@
           Import
         </a>
         <import-form></import-form>
+        <a class="link item" v-on="click: logout()">
+          logout {{user.name}}
+        </a>
       </div>
     </div>
   </div>

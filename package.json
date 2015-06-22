@@ -9,8 +9,10 @@
   "dependencies": {
     "draggabilly": "^1.2.4",
     "jsinclude": "~1.0.2",
+    "keymaster": "^1.6.2",
     "marked": "~0.3.3",
-    "pouchdb": "~3.2.0",
+    "pouchdb": "^3.5.0",
+    "pouchdb-authentication": "^0.4.0",
     "vue": "~0.11.5"
   },
   "devDependencies": {
