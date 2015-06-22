@@ -66,7 +66,7 @@ gulp.task('apps', function() {
     matches.forEach(function(ddoc) {
       push(couch_url, ddoc,
         function(err, resp) {
-          if (err) throw err;
+          if (err) throw JSON.stringify(err);
           console.log(resp);
         });
     });
