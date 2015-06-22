@@ -46,8 +46,8 @@
       <a class="launch item" v-on="click: toggleSidebar">
         <i class="icon list"
           v-class="layout: !ui.sidebarIsOpen, close: ui.sidebarIsOpen"></i>
-        <span v-if="current.notebook_name">{{current.notebook_name}}</span>
-        <span v-if="!current.notebook_name">Notebooks</span>
+        <span v-if="current.notebook.key">{{current.notebook.key}}</span>
+        <span v-if="!current.notebook.key">Notebooks</span>
       </a>
 
       <thing-type-list v-with="current: current"></thing-type-list>

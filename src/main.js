@@ -21,7 +21,7 @@ window.Sprung = new Vue({
       sidebarIsOpen: false
     },
     current: {
-      notebook: false,
+      notebook: {},
       type: false,
       doc: {}
     },

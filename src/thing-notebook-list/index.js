@@ -3,10 +3,15 @@ module.exports = {
   template: require('./template.html'),
   data: function() {
     return {
-      apiUrl: '_view/notebooks?reduce=false',
+      apiUrl: '_view/notebooks?reduce=false&include_docs=true',
       current: {},
       items: []
     };
+  },
+  computed: {
+    isActive: function() {
+      return (Object.keys(this.current).length > 0);
+    }
   },
   methods: {
     fetchData: function () {
@@ -20,12 +25,10 @@ module.exports = {
       xhr.send();
     },
     setCurrent: function(notebook) {
-      this.$parent.current.notebook = notebook.id;
-      this.$parent.current.notebook_name = notebook.key;
+      this.$parent.current.notebook = notebook;
     },
     unsetCurrent: function() {
-      this.$parent.current.notebook = false;
-      this.$parent.current.notebook_name = false;
+      this.$parent.current.notebook = {};
     }
   },
   created: function() {

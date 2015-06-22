@@ -1,11 +1,18 @@
 var Draggabilly = require('draggabilly');
 
+var PouchDB = require('pouchdb');
+// TODO: move this to a config lib
+var db_name = location.pathname.split('/')[1];
+var db_url = location.protocol + '//' + location.hostname
+    + (location.port ? ':' + location.port : '') + '/' + db_name + '/';
+var db = new PouchDB(db_url);
+
 module.exports = {
   replace: true,
   template: require('./template.html'),
   data: function() {
     return {
-      notebook: false,
+      notebook: {},
       type: false,
       items: {
         rows: []
@@ -14,19 +21,20 @@ module.exports = {
   },
   computed: {
     apiUrl: function() {
-      if (this.notebook !== false && this.type !== false) {
+      if (Object.keys(this.notebook).length > 0 && this.type !== false) {
         // things of a certain kind from a certain place
         return '_view/by_notebook?reduce=false'
-          + '&startkey=["' + this.notebook + '", "' + this.type + '"]'
-          + '&endkey=["' + this.notebook + '", "' + this.type + '", {}]'
+          + '&startkey=["' + this.notebook._id + '", "' + this.type + '"]'
+          + '&endkey=["' + this.notebook._id + '", "' + this.type + '", {}]'
           + '&include_docs=true';
-      } else if (this.notebook !== false && this.type === false) {
+      } else if (Object.keys(this.notebook).length > 0 && this.type === false) {
         // all the things from a certain place
         return '_view/by_notebook?reduce=false'
-          + '&startkey=["' + this.notebook + '"]'
-          + '&endkey=["' + this.notebook + '", {}]'
+          + '&startkey=["' + this.notebook._id + '"]'
+          + '&endkey=["' + this.notebook._id + '", {}]'
           + '&include_docs=true';
-      } else if (this.notebook === false && this.type !== false) {
+      } else if (Object.keys(this.notebook).length === 0
+          && this.type !== false) {
         // all the things of a certain type from all the places
         return '_view/by_type?startkey=["' + this.type + '"]&endkey=["' +
           this.type + '",{}]&reduce=false&include_docs=true';
@@ -73,12 +81,32 @@ module.exports = {
     draggable: {
       bind: function() {
         var self = this;
-        if (self.vm.notebook !== false) {
+        if (Object.keys(self.vm.notebook).length > 0) {
+          // make it draggable
           var draggie = new Draggabilly(self.el);
-          draggie.on('staticClick',
-            function(ev, pointer) {
-              self.vm.modalMe(self.vm);
-            });
+          draggie
+            .on('staticClick',
+              function(ev) {
+                self.vm.modalMe(self.vm);
+              })
+            .on('dragEnd',
+              function(ev) {
+                // TODO: save position to notebook
+                self.vm.notebook.positions[self.vm.doc._id] = [draggie.position.x + 'px', draggie.position.y + 'px'];
+                db.put(self.vm.notebook)
+                  .then(function(resp) {
+                    // TODO: confirm saving; handle errors
+                  });
+              });
+          // add stored position info to card
+          if (self.vm.notebook.positions &&
+              self.vm.notebook.positions[self.vm.doc._id]) {
+            var left = self.vm.notebook.positions[self.vm.doc._id][0];
+            var top = self.vm.notebook.positions[self.vm.doc._id][1];
+            self.el.style.left = left;
+            self.el.style.top = top;
+            self.el.style.position = 'absolute';
+          }
         } else {
           self.el.addEventListener('click', function() {
             self.vm.modalMe(self.vm);

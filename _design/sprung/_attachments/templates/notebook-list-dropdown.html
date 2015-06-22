@@ -4,8 +4,8 @@
           <strong v-if="!current.notebook" class="text">
             All
           </strong>
-          <strong v-if="current.notebook_name" class="text">
-            {{current.notebook_name}}
+          <strong v-if="current.notebook.key" class="text">
+            {{current.notebook.key}}
           </strong>
           <i class="dropdown icon"></i>
           <div class="menu">
