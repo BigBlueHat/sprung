@@ -1,9 +1,15 @@
+var PouchDB = require('pouchdb');
+// TODO: move this to a config lib
+var db_name = location.pathname.split('/')[1];
+var db_url = location.protocol + '//' + location.hostname
+    + (location.port ? ':' + location.port : '') + '/' + db_name + '/';
+var db = new PouchDB(db_url);
+
 module.exports = {
   replace: true,
   template: require('./template.html'),
   data: function() {
     return {
-      apiUrl: '_view/notebooks?reduce=false&include_docs=true',
       items: []
     };
   },
@@ -16,15 +22,11 @@ module.exports = {
       }
     },
     fetchData: function () {
-      if (!this.apiUrl) return false;
-      var xhr = new XMLHttpRequest(),
-          self = this;
-      xhr.open('GET', self.apiUrl);
-      xhr.onload = function () {
-        // TODO: be less rash...
-        self.items = JSON.parse(xhr.responseText).rows;
-      };
-      xhr.send();
+      var self = this;
+      db.query('sprung/notebooks', {reduce: false, include_docs: true})
+        .then(function(resp) {
+          self.items = resp.rows;
+        });
     },
     setCurrent: function(notebook) {
       this.$root.current.notebook = notebook;
