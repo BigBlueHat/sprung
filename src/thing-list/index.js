@@ -69,7 +69,7 @@ module.exports = {
     }
   },
   events: {
-    thingMade: function(id) {
+    thingMade: function() {
       this.fetchData();
     }
   },

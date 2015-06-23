@@ -168,11 +168,12 @@ window.Sprung = new Vue({
     truncate: require('./filters/truncate')
   },
   events: {
-    thingMade: function(id) {
+    thingMade: function(doc) {
       // feel a bit silly sending this back down
       // the stack...but not sure how else to do
       // it without "hard" references to components...which is worse...imo
-      this.$broadcast('thingMade', id);
+      // TODO: not sure if sending the doc around is too heavy or not...
+      this.$broadcast('thingMade', doc);
     }
   }
 });

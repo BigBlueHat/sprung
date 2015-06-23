@@ -13,6 +13,14 @@ module.exports = {
       items: []
     };
   },
+  events: {
+    thingMade: function(doc) {
+      if (doc.type === 'Notebook') {
+        this.$root.current.notebook = doc;
+        this.fetchData();
+      }
+    }
+  },
   methods: {
     isActive: function(id) {
       if (Object.keys(this.$root.current).length > 0) {
@@ -25,6 +33,11 @@ module.exports = {
       var self = this;
       db.query('sprung/notebooks', {reduce: false, include_docs: true})
         .then(function(resp) {
+          // TODO: make this binding bi-directional to avoid the silliness
+          resp.rows.forEach(function(row) {
+            // doing this for "Add to Notebook(s)" menu
+            self.$root.notebooks[row.id] = row.key;
+          });
           self.items = resp.rows;
         });
     },
