@@ -22,6 +22,12 @@
     </div>
     <div class="content">
       <div v-ref="editor" v-component="{{editor}}" v-with="id: schema_url, doc: doc"></div>
+      <div class="ui form">
+        <select class="field" multiple
+          v-model="doc.notebooks">
+          <option v-repeat="notebooks" v-attr="selected: doc.notebooks.indexOf($key) != -1" value="{{$key}}">{{$value}}</option>
+        </select>
+      </div>
     </div>
     <div class="actions">
       <div class="ui tiny buttons">

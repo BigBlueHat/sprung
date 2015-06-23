@@ -10,7 +10,8 @@ var default_data = {
   active: false,
   name: 'JSON',
   schema_url: '',
-  doc: {}
+  doc: {},
+  notebooks: {}
 };
 
 module.exports = {

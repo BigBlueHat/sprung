@@ -28,7 +28,8 @@ window.Sprung = new Vue({
       type: false,
       doc: {}
     },
-    types: {}
+    types: {},
+    notebooks: {}
   },
   computed: {
     loggedIn: function() {
@@ -49,6 +50,13 @@ window.Sprung = new Vue({
           self.types[row.key] = row.value;
           // and it's component JS (editor and/or viewer)
           include.once(db_url + row.id + '/component.js');
+        });
+      }
+    );
+    db.query('sprung/notebooks', {reduce: false})
+      .then(function(resp) {
+        resp.rows.forEach(function(row) {
+          self.notebooks[row.id] = row.key;
         });
       }
     );
@@ -104,6 +112,7 @@ window.Sprung = new Vue({
       }
       modal.$set('doc', doc);
       modal.$set('active', true);
+      modal.$set('notebooks', this.notebooks);
       modal.$mount();
       modal.$appendTo(this.$el);
     },
