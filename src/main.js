@@ -60,6 +60,23 @@ window.Sprung = new Vue({
         });
       }
     );
+
+    // get the sprung config document
+    db.get('sprung')
+      .then(function(doc) {
+        if (Object.keys(doc.defaults).length > 0
+            && doc.defaults.notebook) {
+          return doc.defaults.notebook;
+        }
+      })
+      .then(function(notebook_id) {
+        return db.get(notebook_id);
+      })
+      .then(function(notebook) {
+        self.current.notebook = notebook;
+      });
+      // TODO: handle errors ^_^
+
     db.getSession(function(err, resp) {
       if (err) {
         // network error

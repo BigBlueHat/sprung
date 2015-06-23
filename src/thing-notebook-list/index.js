@@ -4,31 +4,33 @@ module.exports = {
   data: function() {
     return {
       apiUrl: '_view/notebooks?reduce=false&include_docs=true',
-      current: {},
       items: []
     };
   },
-  computed: {
-    isActive: function() {
-      return (Object.keys(this.current).length > 0);
-    }
-  },
   methods: {
+    isActive: function(id) {
+      if (Object.keys(this.$root.current).length > 0) {
+        return this.$root.current.notebook._id === id;
+      } else {
+        return false;
+      }
+    },
     fetchData: function () {
       if (!this.apiUrl) return false;
       var xhr = new XMLHttpRequest(),
           self = this;
       xhr.open('GET', self.apiUrl);
       xhr.onload = function () {
-        self.items = JSON.parse(xhr.responseText);
+        // TODO: be less rash...
+        self.items = JSON.parse(xhr.responseText).rows;
       };
       xhr.send();
     },
     setCurrent: function(notebook) {
-      this.$parent.current.notebook = notebook;
+      this.$root.current.notebook = notebook;
     },
     unsetCurrent: function() {
-      this.$parent.current.notebook = {};
+      this.$root.current.notebook = {};
     }
   },
   created: function() {

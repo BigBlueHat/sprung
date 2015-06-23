@@ -1,13 +1,18 @@
 <div class="ui large left vertical inverted labeled sidebar menu" id="menu"
   v-class="uncover: $root.ui.sidebarIsOpen,
     visible: $root.ui.sidebarIsOpen">
-    <a class="item" v-on="click: unsetCurrent()" v-class="active: !isActive">
+    <a class="item"
+       v-on="click: unsetCurrent(),
+             click: $root.toggleSidebar()"
+       v-class="active: !isActive">
       All
     </a>
-    <a class="item" v-on="click: setCurrent(this.doc), click: $root.toggleSidebar()" v-class="active: isActive"
-      v-repeat="items.rows">
+    <a class="item" v-on="click: setCurrent(this.doc), click: $root.toggleSidebar()" v-class="active: isActive(doc._id)"
+      v-repeat="items">
       {{doc.name}}
-      <i class="write icon" v-on="click: this.$root.editDoc(doc)"></i>
+      <i class="write icon"
+         v-on="click: $root.editDoc(doc)"
+         v-if="$root.loggedIn"></i>
     </a>
   </div>
 </div>
