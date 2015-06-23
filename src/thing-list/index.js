@@ -24,13 +24,13 @@ module.exports = {
       if (Object.keys(this.notebook).length > 0 && this.type !== false) {
         // things of a certain kind from a certain place
         return '_view/by_notebook?reduce=false'
-          + '&startkey=["' + this.notebook._id + '", "' + this.type + '"]'
+          + '&startkey=["' + this.notebook._id + '", "' + this.type + '", 0]'
           + '&endkey=["' + this.notebook._id + '", "' + this.type + '", {}]'
           + '&include_docs=true';
       } else if (Object.keys(this.notebook).length > 0 && this.type === false) {
         // all the things from a certain place
         return '_view/by_notebook?reduce=false'
-          + '&startkey=["' + this.notebook._id + '"]'
+          + '&startkey=["' + this.notebook._id + '", 0]'
           + '&endkey=["' + this.notebook._id + '", {}]'
           + '&include_docs=true';
       } else if (Object.keys(this.notebook).length === 0

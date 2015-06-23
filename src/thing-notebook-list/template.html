@@ -7,6 +7,7 @@
     <a class="item" v-on="click: setCurrent(this.doc), click: $root.toggleSidebar()" v-class="active: isActive"
       v-repeat="items.rows">
       {{doc.name}}
+      <i class="write icon" v-on="click: this.$root.editDoc(doc)"></i>
     </a>
   </div>
 </div>
