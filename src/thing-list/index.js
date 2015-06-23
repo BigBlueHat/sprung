@@ -14,9 +14,7 @@ module.exports = {
     return {
       notebook: {},
       type: false,
-      items: {
-        rows: []
-      }
+      items: []
     };
   },
   computed: {
@@ -59,7 +57,13 @@ module.exports = {
           self = this;
       xhr.open('GET', self.apiUrl);
       xhr.onload = function () {
-        self.items = JSON.parse(xhr.responseText);
+        var rv = JSON.parse(xhr.responseText);
+        self.items = [];
+        for (var i = 0; i < rv.rows.length; i++) {
+          if (rv.rows[i].type !== 'Notebook') {
+            self.items.push(rv.rows[i]);
+          }
+        }
       };
       xhr.send();
     },

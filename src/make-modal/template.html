@@ -26,7 +26,7 @@
         <h4 class="ui header">Add to Notebook(s)</h4>
         <select class="field" multiple
           v-model="doc.notebooks">
-          <option v-repeat="notebooks" v-attr="selected: doc.notebooks.indexOf($key) != -1" value="{{$key}}">{{$value}}</option>
+          <option v-repeat="notebooks" v-attr="selected: doc.notebooks && doc.notebooks.indexOf($key) != -1" value="{{$key}}">{{$value}}</option>
         </select>
       </div>
     </div>

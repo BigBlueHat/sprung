@@ -2,8 +2,7 @@
   <div class="ui five doubling cards">
     <a class="card"
       v-draggable
-      v-repeat="items.rows"
-      v-if="doc.type !== 'Notebook'"
+      v-repeat="items"
       data-thing-id="{{doc._id}}">
       <span class="ui left corner label"
         v-if="doc.image" title="{{doc.type}}">
