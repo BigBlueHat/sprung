@@ -95,6 +95,9 @@ module.exports = {
                   });
               });
           // add stored position info to card
+          if (undefined === self.vm.notebook.positions) {
+            self.vm.notebook.positions = {};
+          }
           if (self.vm.notebook.positions &&
               self.vm.notebook.positions[self.vm.doc._id]) {
             var left = self.vm.notebook.positions[self.vm.doc._id][0];
