@@ -19,32 +19,7 @@ module.exports = {
   },
   computed: {
     apiUrl: function() {
-      if (Object.keys(this.notebook).length > 0 && this.type !== false) {
-        // things of a certain kind from a certain place
-        return '_view/by_notebook?reduce=false'
-          + '&startkey=["' + this.notebook._id + '", "' + this.type + '", 0]'
-          + '&endkey=["' + this.notebook._id + '", "' + this.type + '", {}]'
-          + '&include_docs=true';
-      } else if (Object.keys(this.notebook).length > 0 && this.type === false) {
-        // all the things from a certain place
-        return '_view/by_notebook?reduce=false'
-          + '&startkey=["' + this.notebook._id + '", 0]'
-          + '&endkey=["' + this.notebook._id + '", {}]'
-          + '&include_docs=true';
-      } else if (Object.keys(this.notebook).length === 0
-          && this.type !== false) {
-        // all the things of a certain type from all the places
-        return '_view/by_type?startkey=["' + this.type + '"]&endkey=["' +
-          this.type + '",{}]&reduce=false&include_docs=true';
-      } else {
-        // all the things from all the places
-        // TODO: paginate this thing
-        return '_view/by_type?reduce=false&include_docs=true';
-      }
     }
-  },
-  created: function() {
-    this.fetchData();
   },
   watch: {
     notebook: 'fetchData',
@@ -52,20 +27,57 @@ module.exports = {
   },
   methods: {
     fetchData: function () {
-      if (!this.apiUrl) return false;
-      var xhr = new XMLHttpRequest(),
-          self = this;
-      xhr.open('GET', self.apiUrl);
-      xhr.onload = function () {
-        var rv = JSON.parse(xhr.responseText);
-        self.items = [];
-        for (var i = 0; i < rv.rows.length; i++) {
-          if (rv.rows[i].type !== 'Notebook') {
-            self.items.push(rv.rows[i]);
+      var self = this;
+      var view = '';
+      var params = {};
+      // select the proper view & params
+      if (Object.keys(this.notebook).length > 0 && this.type !== false) {
+        // things of a certain kind from a certain place
+        view = 'by_notebook';
+        params = {
+          reduce: false,
+          startkey: [this.notebook._id, this.type, 0],
+          endkey: [this.notebook._id, this.type, {}],
+          include_docs: true
+        };
+      } else if (Object.keys(this.notebook).length > 0 && this.type === false) {
+        // all the things from a certain place
+        view = 'by_notebook';
+        params = {
+          reduce: false,
+          startkey: [this.notebook._id, 0],
+          endkey: [this.notebook._id, {}],
+          include_docs: true
+        };
+      } else if (Object.keys(this.notebook).length === 0
+          && this.type !== false) {
+        // all the things of a certain type from all the places
+        view = 'by_type';
+        params = {
+          reduce: false,
+          startkey: [this.type],
+          endkey: [this.type, {}],
+          include_docs: true
+        };
+      } else {
+        // all the things from all the places
+        // TODO: paginate this thing
+        view = 'by_type';
+        params = {
+          reduce: false,
+          include_docs: true
+        };
+      }
+
+      db.query('sprung/' + view, params)
+        .then(function(resp) {
+          self.items = [];
+          for (var i = 0; i < resp.rows.length; i++) {
+            if (resp.rows[i].type !== 'Notebook') {
+              self.items.push(resp.rows[i]);
+            }
           }
-        }
-      };
-      xhr.send();
+        });
     },
     modalMe: function(ev) {
       if (undefined == ev.targetVM) {
