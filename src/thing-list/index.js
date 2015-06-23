@@ -22,8 +22,7 @@ module.exports = {
     }
   },
   watch: {
-    notebook: 'fetchData',
-    type: 'fetchData'
+    notebook: 'fetchData'
   },
   methods: {
     fetchData: function () {
@@ -31,32 +30,13 @@ module.exports = {
       var view = '';
       var params = {};
       // select the proper view & params
-      if (Object.keys(this.notebook).length > 0 && this.type !== false) {
-        // things of a certain kind from a certain place
-        view = 'by_notebook';
-        params = {
-          reduce: false,
-          startkey: [this.notebook._id, this.type, 0],
-          endkey: [this.notebook._id, this.type, {}],
-          include_docs: true
-        };
-      } else if (Object.keys(this.notebook).length > 0 && this.type === false) {
+      if (Object.keys(this.notebook).length > 0) {
         // all the things from a certain place
         view = 'by_notebook';
         params = {
           reduce: false,
           startkey: [this.notebook._id, 0],
           endkey: [this.notebook._id, {}],
-          include_docs: true
-        };
-      } else if (Object.keys(this.notebook).length === 0
-          && this.type !== false) {
-        // all the things of a certain type from all the places
-        view = 'by_type';
-        params = {
-          reduce: false,
-          startkey: [this.type],
-          endkey: [this.type, {}],
           include_docs: true
         };
       } else {
