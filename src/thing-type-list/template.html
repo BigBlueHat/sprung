@@ -1,7 +1,7 @@
-<div class="section ui dropdown simple link item"
+<div class="ui simple compact icon dropdown item"
   v-on="click: this.$el.firstElementChild.classList.toggle('visible')">
   <strong v-if="!current.type" class="text">
-    All Types
+    <i class="filter icon"></i>
   </strong>
   <strong v-if="current.type" class="text">
     <i class="{{current.type | iconize}} icon"></i>
@@ -11,7 +11,7 @@
   <div class="menu">
     <div class="item" v-on="click: current.type = false"
       v-class="active: current.type == false">
-      All
+      All Types
     </div>
     <div class="item" v-on="click: current.type = type"
       v-class="active: current.type == type"
