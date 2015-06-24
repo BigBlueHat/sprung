@@ -66,7 +66,13 @@ window.Sprung = new Vue({
             && doc.defaults.notebook) {
           return doc.defaults.notebook;
         } else {
-          throw "No default notebook defined";
+          // mimic the CouchDB response style, but with a custom `reason`
+          throw {
+            error: true,
+            status: 404,
+            name: "not_found",
+            reason: "No default notebook defined"
+          };
         }
       })
       .then(function(notebook_id) {
@@ -75,7 +81,7 @@ window.Sprung = new Vue({
       .then(function(notebook) {
         self.current.notebook = notebook;
       }).catch(function(err) {
-        if (err === "No default notebook defined") {
+        if (err.status === 404) {
           // set the default again to trigger thing-list updating
           // TODO: srsly...?! O.o
           self.current.notebook = {};
