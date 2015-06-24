@@ -17,10 +17,6 @@ module.exports = {
       items: []
     };
   },
-  computed: {
-    apiUrl: function() {
-    }
-  },
   watch: {
     notebook: 'fetchData'
   },
