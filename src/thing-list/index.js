@@ -17,8 +17,11 @@ module.exports = {
       items: []
     };
   },
-  watch: {
-    notebook: 'fetchData'
+  ready: function() {
+    // using $watch (vs. watch object) to avoid acting on the default value
+    this.$watch('notebook', function() {
+      this.fetchData();
+    });
   },
   methods: {
     fetchData: function () {
