@@ -65,6 +65,8 @@ window.Sprung = new Vue({
         if (Object.keys(doc.defaults).length > 0
             && doc.defaults.notebook) {
           return doc.defaults.notebook;
+        } else {
+          throw "No default notebook defined";
         }
       })
       .then(function(notebook_id) {
@@ -72,8 +74,13 @@ window.Sprung = new Vue({
       })
       .then(function(notebook) {
         self.current.notebook = notebook;
+      }).catch(function(err) {
+        if (err === "No default notebook defined") {
+          // set the default again to trigger thing-list updating
+          // TODO: srsly...?! O.o
+          self.current.notebook = {};
+        }
       });
-      // TODO: handle errors ^_^
 
     db.getSession(function(err, resp) {
       if (err) {
