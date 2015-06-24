@@ -1,11 +1,9 @@
 var Vue = require('vue');
-var PouchDB = require('pouchdb');
-PouchDB.plugin(require('pouchdb-authentication'));
 var include = require('jsinclude');
 var key = require('keymaster');
 
-Vue.config.debug = true;
-
+var PouchDB = require('pouchdb');
+PouchDB.plugin(require('pouchdb-authentication'));
 // TODO: move this to a config lib
 var db_name = location.pathname.split('/')[1];
 var db_url = location.protocol + '//' + location.hostname
