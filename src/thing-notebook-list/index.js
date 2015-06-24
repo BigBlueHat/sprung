@@ -19,6 +19,21 @@ module.exports = {
         this.$root.current.notebook = doc;
         this.fetchData();
       }
+    },
+    thingGone: function(doc) {
+      if (doc.type === 'Notebook') {
+        // TODO: set back to the default
+        // handle the current notebook being deleted
+        if (this.$root.current.notebook._id === doc._id) {
+          this.$root.current.notebook = {};
+        }
+        // also remove the deleted notebook from the list of items
+        for (var i = 0; i < this.items.length; i++) {
+          if (this.items[i].id === doc._id) {
+            this.items.$remove(i);
+          }
+        }
+      }
     }
   },
   methods: {

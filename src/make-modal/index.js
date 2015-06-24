@@ -62,6 +62,19 @@ module.exports = {
           self.destroy();
         }
       });
+    },
+    remove: function() {
+      var self = this;
+      db.remove(self.doc._id, self.doc._rev, function(err, resp) {
+        if (err) {
+          console.log('error: ', err);
+        } else {
+          self.$dispatch('thingGone', self.doc);
+          // close the modal
+          self.destroy();
+        }
+      });
     }
+
   }
 };

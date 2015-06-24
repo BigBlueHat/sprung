@@ -174,6 +174,9 @@ window.Sprung = new Vue({
       // it without "hard" references to components...which is worse...imo
       // TODO: not sure if sending the doc around is too heavy or not...
       this.$broadcast('thingMade', doc);
+    },
+    thingGone: function(doc) {
+      this.$broadcast('thingGone', doc);
     }
   }
 });

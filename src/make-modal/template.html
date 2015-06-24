@@ -31,6 +31,11 @@
       </div>
     </div>
     <div class="actions">
+      <div class="ui left floated red button"
+        v-if="$root.loggedIn && doc._rev"
+        v-on="click: remove()">
+        Delete
+      </div>
       <div class="ui tiny buttons">
         <div class="ui positive button"
           v-on="click: save()">
