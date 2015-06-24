@@ -71,6 +71,13 @@ module.exports = {
   events: {
     thingMade: function() {
       this.fetchData();
+    },
+    thingGone: function(doc) {
+      for (var i = 0; i < this.items.length; i++) {
+        if (this.items[i].id === doc._id) {
+          this.items.$remove(i);
+        }
+      }
     }
   },
   directives: {

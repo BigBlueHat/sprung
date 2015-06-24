@@ -47,9 +47,7 @@ module.exports = {
         if (err) {
           console.log('error: ', err);
         } else {
-          // TODO: use a $dipatch to trigger DOM removal instead
-          var el = document.querySelector('[data-thing-id="' + self.doc._id + '"]');
-          el.__vue__.$destroy(true);
+          self.$dispatch('thingGone', self.doc);
           self.destroy();
         }
       });
