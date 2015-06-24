@@ -10,37 +10,29 @@ module.exports = {
   template: require('./template.html'),
   data: function() {
     return {
-      notebook: false,
+      current: {
+        notebook: {},
+        type: false
+      },
       types: []
     };
   },
-  computed: {
-    apiUrl: function() {
-      if (this.notebook) {
-        return '_view/by_notebook?group_level=2&startkey=["' + this.notebook
-          + '"]&endkey=["' + this.notebook + '", {}]';
-      } else {
-        return '_view/by_type?group_level=1';
-      }
-    }
-  },
-  created: function() {
-    this.fetchData();
-  },
-  watch: {
-    notebook: 'fetchData'
+  ready: function() {
+    this.$watch('current.notebook', function() {
+      this.fetchData();
+    });
   },
   methods: {
     fetchData: function () {
       var self = this;
       var view = '';
       var params = {};
-      if (this.notebook) {
+      if (Object.keys(this.current.notebook).length > 0) {
         view = 'by_notebook';
         params = {
           group_level: 2,
-          startkey: [this.notebook],
-          endkey: [this.notebook, {}]
+          startkey: [this.current.notebook._id],
+          endkey: [this.current.notebook._id, {}]
         };
       } else {
         view = 'by_type';
@@ -51,20 +43,19 @@ module.exports = {
 
       db.query('sprung/' + view, params)
         .then(function(resp) {
-          self.items = resp;
           self.types = [];
-          if (self.notebook) {
-            for (var i = 0; i < self.items.rows.length; i++) {
+          if (Object.keys(self.current.notebook).length > 0) {
+            for (var i = 0; i < resp.rows.length; i++) {
               // if there are 2 keys, we have a type entry
-              if (self.items.rows[i].key.length === 2) {
-                self.types.push({"type": self.items.rows[i].key[1],
-                  "count": self.items.rows[i].value});
+              if (resp.rows[i].key.length === 2) {
+                self.types.push({"type": resp.rows[i].key[1],
+                  "count": resp.rows[i].value});
               }
             }
           } else {
-            for (var i = 0; i < self.items.rows.length; i++) {
-              self.types.push({"type": self.items.rows[i].key[0],
-                "count": self.items.rows[i].value});
+            for (var i = 0; i < resp.rows.length; i++) {
+              self.types.push({"type": resp.rows[i].key[0],
+                "count": resp.rows[i].value});
             }
           }
         });
