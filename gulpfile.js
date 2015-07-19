@@ -7,6 +7,7 @@ var glob = require('glob');
 var gulp = require('gulp');
 var partialify = require('partialify');
 var push = require('couch-push');
+var runSequence = require('run-sequence');
 var source = require('vinyl-source-stream');
 
 var argv = require('yargs').argv;
@@ -73,4 +74,6 @@ gulp.task('apps', function() {
   });
 });
 
-gulp.task('default', ['sprung', 'apps', 'docs']);
+gulp.task('default', function() {
+  runSequence('sprung', ['apps', 'docs']);
+});
