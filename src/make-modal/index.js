@@ -51,6 +51,13 @@ module.exports = {
       var self = this;
       // get doc from editor
       var doc = this.$.editor.output();
+      if (undefined === doc._id) {
+        // we have a new doc, so add `created` date
+        doc.created = (new Date).toISOString();
+      }
+      // regardless, add the `modified` date
+      doc.modified = (new Date).toISOString();
+
       // save doc
       db.post(doc, function(err, resp) {
         if (err) {
