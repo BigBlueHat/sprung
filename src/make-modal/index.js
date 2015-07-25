@@ -58,6 +58,18 @@ module.exports = {
       // regardless, add the `modified` date
       doc.modified = (new Date).toISOString();
 
+      // add this doc to the current notebook
+      var notebook_id = this.$root.current.notebook._id;
+      if (undefined === doc.notebooks) {
+        doc.notebooks = [];
+      }
+      // we're inside a notebook
+      if (undefined !== notebook_id
+          // and this doc isn't already in that notebook
+          && doc.notebooks.indexOf(notebook_id) < 0) {
+        doc.notebooks.push(notebook_id);
+      }
+
       // save doc
       db.post(doc, function(err, resp) {
         if (err) {
