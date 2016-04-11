@@ -1,11 +1,13 @@
 var Draggabilly = require('draggabilly');
 
+var draggie = false;
+
 module.exports = {
   bind: function() {
     var self = this;
     if (Object.keys(self.vm.notebook).length > 0) {
       // make it draggable
-      var draggie = new Draggabilly(self.el);
+      draggie = new Draggabilly(self.el);
       draggie
         .on('staticClick',
           function(ev) {
@@ -20,12 +22,6 @@ module.exports = {
                 // TODO: confirm saving; handle errors
               });
           });
-        console.log('logged in?', self.vm.$root.loggedIn);
-      if (self.vm.$root.loggedIn) {
-        draggie.enable();
-      } else {
-        draggie.disable();
-      }
       // add stored position info to card
       if (undefined === self.vm.notebook.positions) {
         self.vm.notebook.positions = {};
@@ -42,6 +38,15 @@ module.exports = {
       self.el.addEventListener('click', function() {
         self.vm.modalMe(self.vm);
       });
+    }
+  },
+  update: function(newValue, oldValue) {
+    if (draggie) {
+      if (newValue) {
+        draggie.enable();
+      } else {
+        draggie.disable();
+      }
     }
   }
 };

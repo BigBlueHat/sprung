@@ -1,7 +1,7 @@
 <article class="content">
   <div class="ui five doubling cards">
     <a class="card"
-      v-draggable
+      v-draggable="loggedin"
       v-repeat="items | filterBy type in 'doc.type'"
       data-thing-id="{{doc._id}}">
       <span class="ui left corner label"
