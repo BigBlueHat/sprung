@@ -184,6 +184,9 @@ window.Sprung = new Vue({
     iconize: require('./filters/iconize'),
     truncate: require('./filters/truncate')
   },
+  directives: {
+    draggable: require('./directives/draggable')
+  },
   events: {
     thingMade: function(doc) {
       // feel a bit silly sending this back down

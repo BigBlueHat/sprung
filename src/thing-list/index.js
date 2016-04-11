@@ -69,8 +69,5 @@ module.exports = {
         }
       }
     }
-  },
-  directives: {
-    draggable: require('../directives/draggable')
   }
 };
