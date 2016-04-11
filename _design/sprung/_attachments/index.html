@@ -42,10 +42,10 @@
   <!-- collapsible sidebar -->
   <div class="ui tiny icon launch right attached fixed button"
        v-on="click: toggleSidebar"
-       v-if="!loggedIn">
+       v-if="showSidebar">
     <i class="content icon"></i>
   </div>
-  <thing-notebook-list></thing-notebook-list>
+  <thing-notebook-list v-if="showSidebar"></thing-notebook-list>
 
   <article class="pusher">
   <!-- header menu -->

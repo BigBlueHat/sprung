@@ -26,7 +26,8 @@ window.Sprung = new Vue({
       doc: {}
     },
     types: {},
-    notebooks: {}
+    notebooks: {},
+    settings: {}
   },
   computed: {
     loggedIn: function() {
@@ -35,6 +36,21 @@ window.Sprung = new Vue({
         return true;
       } else {
         return false;
+      }
+    },
+    showSidebar: function() {
+      if (this.loggedIn) {
+        // always show the sidebar to logged in users
+        return true;
+      } else {
+        if ('show' in this.settings
+            && 'sidebar' in this.settings.show) {
+          // return the Boolean if it's been set
+          return Boolean(this.settings.show.sidebar);
+        } else {
+          // otherwise, it defaults to true
+          return true;
+        }
       }
     }
   },
@@ -61,6 +77,11 @@ window.Sprung = new Vue({
     // get the sprung config document
     self.$db.get('sprung')
       .then(function(doc) {
+        delete doc._id;
+        delete doc._rev;
+        // set the sprung doc as the settings object
+        self.settings = doc;
+        // if there's a default notebook, handle that
         if (Object.keys(doc.defaults).length > 0
             && doc.defaults.notebook) {
           return doc.defaults.notebook;
