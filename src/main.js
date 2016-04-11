@@ -130,6 +130,13 @@ window.Sprung = new Vue({
     importFile: function() {
       document.getElementById('export-file').click()
     },
+    editDocById: function(doc_id) {
+      var self = this;
+      self.$db.get(doc_id)
+        .then(function(doc) {
+          self.editDoc(doc);
+        });
+    },
     editDoc: function(doc, schema_name) {
       var modal = this.$addChild(require('./make-modal'));
       if (schema_name) {

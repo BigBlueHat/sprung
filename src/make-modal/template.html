@@ -22,7 +22,7 @@
     </div>
     <div class="content">
       <div v-ref="editor" v-component="{{editor}}" v-with="id: schema_url, doc: doc"></div>
-      <div v-if="doc.type !== 'Notebook'" class="ui segment form">
+      <div v-if="doc.type !== 'Notebook' && doc.type !== 'settings'" class="ui segment form">
         <h4 class="ui header">Add to Notebook(s)</h4>
         <select class="field" multiple
           v-model="doc.notebooks">

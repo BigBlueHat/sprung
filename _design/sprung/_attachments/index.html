@@ -79,6 +79,10 @@
       </div>
 
       <div class="right menu">
+        <a class="icon item" title="settings"
+           v-on="click: editDocById('sprung')">
+          <i class="setting icon"></i>
+        </a>
         <a class="icon upload item"
            title="pick an export.json file"
            v-on="click: importFile">
