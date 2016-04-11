@@ -13,7 +13,8 @@
     "marked": "~0.3.3",
     "pouchdb": "^3.5.0",
     "pouchdb-authentication": "^0.4.0",
-    "vue": "~0.11.5"
+    "vue": "~0.11.5",
+    "vue-pouchdb": "github:bigbluehat/vue-pouchdb"
   },
   "devDependencies": {
     "browserify": "^9.0.7",

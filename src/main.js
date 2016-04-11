@@ -1,14 +1,13 @@
-var Vue = require('vue');
 var include = require('jsinclude');
 var key = require('keymaster');
 
-var PouchDB = require('pouchdb');
-PouchDB.plugin(require('pouchdb-authentication'));
 // TODO: move this to a config lib
 var db_name = location.pathname.split('/')[1];
 var db_url = location.protocol + '//' + location.hostname
     + (location.port ? ':' + location.port : '') + '/' + db_name + '/';
-var db = new PouchDB(db_url);
+
+var Vue = require('vue');
+Vue.use(require('vue-pouchdb'), {name: db_url});
 
 window.Vue = Vue;
 
@@ -41,7 +40,7 @@ window.Sprung = new Vue({
   },
   created: function() {
     var self = this;
-    db.query('sprung/type_definitions',
+    self.$db.query('sprung/type_definitions',
       function(err, resp) {
         resp.rows.forEach(function(row) {
           // load type info
@@ -51,7 +50,7 @@ window.Sprung = new Vue({
         });
       }
     );
-    db.query('sprung/notebooks', {reduce: false})
+    self.$db.query('sprung/notebooks', {reduce: false})
       .then(function(resp) {
         resp.rows.forEach(function(row) {
           self.notebooks[row.id] = row.key;
@@ -60,7 +59,7 @@ window.Sprung = new Vue({
     );
 
     // get the sprung config document
-    db.get('sprung')
+    self.$db.get('sprung')
       .then(function(doc) {
         if (Object.keys(doc.defaults).length > 0
             && doc.defaults.notebook) {
@@ -76,7 +75,7 @@ window.Sprung = new Vue({
         }
       })
       .then(function(notebook_id) {
-        return db.get(notebook_id);
+        return self.$db.get(notebook_id);
       })
       .then(function(notebook) {
         self.current.notebook = notebook;
@@ -88,7 +87,7 @@ window.Sprung = new Vue({
         }
       });
 
-    db.getSession(function(err, resp) {
+    self.$db.getSession(function(err, resp) {
       if (err) {
         // network error
       } else if (!resp.userCtx.name) {
@@ -104,7 +103,7 @@ window.Sprung = new Vue({
 
     // listen for document-wide keyboard events
     key('ctrl+shift+l', function() {
-      db.getSession(function (err, resp) {
+      self.$db.getSession(function (err, resp) {
         if (err) {
           // network error
         } else if (!resp.userCtx.name) {
@@ -156,7 +155,7 @@ window.Sprung = new Vue({
     logout: function() {
       var self = this;
       // TODO: make this data state driven
-      db.logout(function (err, response) {
+      self.$db.logout(function (err, response) {
         if (err) {
           // network error
           console.log('error', err);

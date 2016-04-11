@@ -1,12 +1,5 @@
 var Draggabilly = require('draggabilly');
 
-var PouchDB = require('pouchdb');
-// TODO: move this to a config lib
-var db_name = location.pathname.split('/')[1];
-var db_url = location.protocol + '//' + location.hostname
-    + (location.port ? ':' + location.port : '') + '/' + db_name + '/';
-var db = new PouchDB(db_url);
-
 module.exports = {
   replace: true,
   template: require('./template.html'),
@@ -48,7 +41,7 @@ module.exports = {
         };
       }
 
-      db.query('sprung/' + view, params)
+      self.$db.query('sprung/' + view, params)
         .then(function(resp) {
           self.items = [];
           for (var i = 0; i < resp.rows.length; i++) {
@@ -95,7 +88,7 @@ module.exports = {
               function(ev) {
                 // TODO: save position to notebook
                 self.vm.notebook.positions[self.vm.doc._id] = [draggie.position.x + 'px', draggie.position.y + 'px'];
-                db.put(self.vm.notebook)
+                self.vm.$db.put(self.vm.notebook)
                   .then(function(resp) {
                     // TODO: confirm saving; handle errors
                   });

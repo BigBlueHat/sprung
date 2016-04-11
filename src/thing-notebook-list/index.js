@@ -1,10 +1,3 @@
-var PouchDB = require('pouchdb');
-// TODO: move this to a config lib
-var db_name = location.pathname.split('/')[1];
-var db_url = location.protocol + '//' + location.hostname
-    + (location.port ? ':' + location.port : '') + '/' + db_name + '/';
-var db = new PouchDB(db_url);
-
 module.exports = {
   replace: true,
   template: require('./template.html'),
@@ -46,7 +39,7 @@ module.exports = {
     },
     fetchData: function () {
       var self = this;
-      db.query('sprung/notebooks', {reduce: false, include_docs: true})
+      self.$db.query('sprung/notebooks', {reduce: false, include_docs: true})
         .then(function(resp) {
           // TODO: make this binding bi-directional to avoid the silliness
           resp.rows.forEach(function(row) {

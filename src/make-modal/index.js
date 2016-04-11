@@ -1,11 +1,3 @@
-var PouchDB = require('pouchdb');
-
-// TODO: move this to a config lib
-var db_name = location.pathname.split('/')[1];
-var db_url = location.protocol + '//' + location.hostname
-    + (location.port ? ':' + location.port : '') + '/' + db_name + '/';
-var db = new PouchDB(db_url);
-
 var default_data = {
   active: false,
   name: 'JSON',
@@ -71,7 +63,7 @@ module.exports = {
       }
 
       // save doc
-      db.post(doc, function(err, resp) {
+      self.$db.post(doc, function(err, resp) {
         if (err) {
           // TODO: maybe tell somebody...
           console.log('error: ', err);
@@ -84,7 +76,7 @@ module.exports = {
     },
     remove: function() {
       var self = this;
-      db.remove(self.doc._id, self.doc._rev, function(err, resp) {
+      self.$db.remove(self.doc._id, self.doc._rev, function(err, resp) {
         if (err) {
           console.log('error: ', err);
         } else {

@@ -1,10 +1,3 @@
-var PouchDB = require('pouchdb');
-// TODO: move this to a config lib
-var db_name = location.pathname.split('/')[1];
-var db_url = location.protocol + '//' + location.hostname
-    + (location.port ? ':' + location.port : '') + '/' + db_name + '/';
-var db = new PouchDB(db_url);
-
 module.exports = {
   replace: true,
   template: require('./template.html'),
@@ -41,7 +34,7 @@ module.exports = {
         };
       }
 
-      db.query('sprung/' + view, params)
+      self.$db.query('sprung/' + view, params)
         .then(function(resp) {
           self.types = [];
           if (Object.keys(self.current.notebook).length > 0) {
