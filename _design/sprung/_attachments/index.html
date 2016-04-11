@@ -42,7 +42,7 @@
   <!-- collapsible sidebar -->
   <div class="ui tiny icon launch right attached fixed button"
        v-on="click: toggleSidebar"
-       v-if="showSidebar">
+       v-if="!loggedIn && showSidebar">
     <i class="icon"
       v-class="content: !ui.sidebarIsOpen,
                close: ui.sidebarIsOpen"></i>
