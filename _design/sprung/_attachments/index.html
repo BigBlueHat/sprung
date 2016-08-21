@@ -10,14 +10,8 @@
   <link rel="stylesheet" type="text/css" href="semantic-ui/semantic.min.css" />
 
   <style type="text/css">
-  body {
-    padding: 2.5em 1em 1em;
-  }
-  .pushable > .pusher {
-    padding: 1em;
-  }
   .loggedIn.pushable > .pusher {
-    padding: 3em 1em;
+    margin-top: 2.5em;
   }
   a.launch.item{cursor: pointer}
   .accordion .title.active{position:relative}
@@ -29,7 +23,8 @@
     overflow-y: auto;
     overflow-x: hidden;
   }
-  .ui.visible.left.sidebar ~ .fixed, .ui.visible.left.sidebar ~ .pusher {
+  .main.menu.opened,
+  .ui.visible.left.sidebar ~ .pusher {
     -webkit-transform: translate3d(18em, 0, 0);
             transform: translate3d(18em, 0, 0);
   }
@@ -48,10 +43,8 @@
                close: ui.sidebarIsOpen"></i>
   </div>
   <thing-notebook-list v-if="showSidebar"></thing-notebook-list>
-
-  <article class="pusher">
   <!-- header menu -->
-  <div v-if="loggedIn" class="ui fixed transparent inverted main menu">
+  <div v-if="loggedIn" class="ui fixed transparent inverted main menu" v-class="opened: ui.sidebarIsOpen">
     <div class="container">
       <a class="launch item" v-on="click: toggleSidebar">
         <i class="icon list"
@@ -98,6 +91,8 @@
       </div>
     </div>
   </div>
+
+  <article class="pusher">
   <thing-list v-with="notebook: current.notebook, type: current.type, loggedin: loggedIn"></thing-list>
   </article>
 
