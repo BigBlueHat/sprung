@@ -35,7 +35,7 @@ gulp.task('sprung', function() {
 });
 
 gulp.task('docs', function() {
-  glob('_docs/*', function(err, matches) {
+  return glob('_docs/*', function(err, matches) {
     if (err) throw err;
 
     matches.forEach(function(doc) {
@@ -62,7 +62,7 @@ gulp.task('docs', function() {
 });
 
 gulp.task('apps', function() {
-  glob('_design/*', function(err, matches) {
+  return glob('_design/*', function(err, matches) {
     if (err) throw err;
     matches.forEach(function(ddoc) {
       push(couch_url, ddoc,
