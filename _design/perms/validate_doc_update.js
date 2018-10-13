@@ -1,8 +1,8 @@
-/**
- * Based on: https://github.com/iriscouch/manage_couchdb/
- * License: Apache License 2.0
- **/
 function(newDoc, oldDoc, userCtx, secObj) {
+  /**
+   * Based on: https://github.com/iriscouch/manage_couchdb/
+   * License: Apache License 2.0
+   **/
   var ddoc = this;
 
   secObj.admins = secObj.admins || {};
