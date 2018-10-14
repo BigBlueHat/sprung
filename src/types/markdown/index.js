@@ -5,8 +5,12 @@ var data = function() {
   }
 };
 
-var filters = {
-  marked: require('marked')
+let marked = required('marked');
+
+let computed = {
+  preview() {
+    return marked(this.content);
+  }
 };
 
 module.exports = {
@@ -14,12 +18,13 @@ module.exports = {
     replace: true,
     template: require('./viewer.html'),
     data: data,
-    filters: filters
+    computed: computed
   },
   editor: {
     template: require('./editor.html'),
     replace: true,
     data: data,
+    computed: computed,
     methods: {
       output: function() {
         var doc = {
@@ -29,7 +34,6 @@ module.exports = {
         }
         return doc;
       }
-    },
-    filters: filters
+    }
   }
 };

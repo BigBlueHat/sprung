@@ -8,7 +8,7 @@ module.exports = {
       items: []
     };
   },
-  ready: function() {
+  mounted: function() {
     // using $watch (vs. watch object) to avoid acting on the default value
     this.$watch('notebook', function() {
       this.fetchData();

@@ -4,7 +4,7 @@
     <i class="filter icon"></i>
   </strong>
   <strong v-if="current.type" class="text">
-    <i class="{{current.type | iconize}} icon"></i>
+    <i v-bind:class="icon_class + ' icon'"></i>
     {{current.type}}
   </strong>
   <i class="dropdown icon"></i>
@@ -16,7 +16,7 @@
     <div class="item" v-on="click: current.type = type"
       v-class="active: current.type == type"
       v-repeat="types">
-      <i class="{{type | iconize}} icon"></i>
+      <i v-bind:class="icon_class + ' icon'"></i>
       {{type}}
     </div>
   </div>

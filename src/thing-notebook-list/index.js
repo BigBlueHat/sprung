@@ -23,7 +23,7 @@ module.exports = {
         // also remove the deleted notebook from the list of items
         for (var i = 0; i < this.items.length; i++) {
           if (this.items[i].id === doc._id) {
-            this.items.$remove(i);
+            this.items.splice(this.items.indexOf(i), 1)
           }
         }
       }

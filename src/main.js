@@ -119,7 +119,7 @@ window.Sprung = new Vue({
       }
     });
   },
-  ready: function() {
+  mounted: function() {
     var self = this;
 
     // listen for document-wide keyboard events

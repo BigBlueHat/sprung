@@ -13,12 +13,14 @@ module.exports = {
   created: function() {
     document.body.classList.add('dimmed', 'dimmable', 'scrolling');
   },
-  ready: function() {
-    var self = this;
-    key('esc', function() {
-      self.destroy();
+  mounted: function() {
+    let self = this;
+    self.$nextTick(() => {
+      key('esc', function() {
+        self.destroy();
+      });
+      self.$el.querySelector('[name=username]').focus();
     });
-    self.$el.querySelector('[name=username]').focus();
   },
   methods: {
     login: function() {

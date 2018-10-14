@@ -16,7 +16,7 @@ module.exports = {
       size: ''
     }
   },
-  ready: function() {
+  mounted: function() {
     include.once('//api.filepicker.io/v1/filepicker.js', function() {
       filepicker.setKey(APIKEY);
     });

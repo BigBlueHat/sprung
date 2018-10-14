@@ -1,3 +1,5 @@
+let iconize = require('../filters/iconize');
+
 module.exports = {
   replace: true,
   template: require('./template.html'),
@@ -10,9 +12,16 @@ module.exports = {
       types: []
     };
   },
-  ready: function() {
-    this.$watch('current.notebook', function() {
-      this.fetchData();
+  computed: {
+    icon_class: {
+      return iconize(this.current.type);
+    }
+  }
+  mounted: function() {
+    this.nextTick(() => {
+      this.$watch('current.notebook', function() {
+        this.fetchData();
+      });
     });
   },
   methods: {
